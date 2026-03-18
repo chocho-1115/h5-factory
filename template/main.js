@@ -53,11 +53,11 @@ P.init({
         false,
         false,
     ],
-    // eslint-disable-next-line
+     
     onChangeBefore(oldIndex, newIndex){
         
     },
-    // eslint-disable-next-line
+     
     onChangeAfter(oldIndex, newIndex){
         
     }
