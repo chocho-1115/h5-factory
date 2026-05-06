@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import chalk from 'chalk'
+// import chalk from 'chalk'
 
 const __dirname = path.resolve()
 
@@ -28,7 +28,7 @@ if(fs.existsSync(tarDir)){
             return
         }
         copyFolder(srcDir, tarDir, ()=> {
-            console.log(' \n' + chalk.green.bold(` [${projectName}] Create completed`) + ' \n')
+            // console.log(' \n' + chalk.green.bold(` [${projectName}] Create completed`) + ' \n')
             console.log(' Path', tarDir)
             console.log(` Run \`npm run dev ${projectName}\` \n`)
         })
