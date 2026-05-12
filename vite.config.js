@@ -40,23 +40,12 @@ export default defineConfig(({
       ViteImageOptimizer({
         includePublic: false, // 不处理public目录，默认值是 true
         png: { quality: 80 },
+        jpg: { quality: 80 }, 
         jpeg: { quality: 80 },
-        jpg : { quality : 80 } , 
-        
         webp : { lossless : true, quality : 80 },
       }),
     ],
   }
-
-  // if(command === 'serve'){
-
-  // }
-
-  // if(command === 'build'){
-  //   config.build = {
-  //     outDir: path.join(__dirname, projectConfig.dist)
-  //   }
-  // }
-
   return config
+
 })
