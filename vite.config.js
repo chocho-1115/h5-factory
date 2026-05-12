@@ -1,4 +1,5 @@
 import path from 'path'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 import {
   defineConfig,
@@ -35,6 +36,16 @@ export default defineConfig(({
       emptyOutDir: true,
       outDir: path.join(__dirname, projectConfig.dist)
     },
+    plugins: [
+      ViteImageOptimizer({
+        includePublic: false, // 不处理public目录，默认值是 true
+        png: { quality: 80 },
+        jpeg: { quality: 80 },
+        jpg : { quality : 80 } , 
+        
+        webp : { lossless : true, quality : 80 },
+      }),
+    ],
   }
 
   // if(command === 'serve'){
