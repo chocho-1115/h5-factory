@@ -14,7 +14,7 @@ function parallelTask(tasks, parallelCount = 2) {
             // 运行下一次任务
             const task = tasks[nextIndex] // 获取当前异步函数
             nextIndex++
-            task().then(() => {
+            task().finally(() => {
                 finishCount++
                 // 运行下一个
                 if (nextIndex < tasks.length) {
