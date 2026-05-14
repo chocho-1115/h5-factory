@@ -73,9 +73,11 @@ const dataSrcImagesPlugin = () => {
 
   return {
     // ---------- 插件元信息 ----------
-
+    
     // 插件名称，用于调试和错误堆栈
     name: 'vite-plugin-data-src-images',
+
+    apply: 'build',
 
     // enforce: 'post' 表示该插件在其他所有插件之后执行，
     // 确保 Vite 内置的 HTML / asset 处理先完成，我们再接手

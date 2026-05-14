@@ -1,4 +1,13 @@
 # h5-webp
+
+
+VM initialization failed: Current Mac OS X version 12.0 is lower than minimum supported version 14.0
+
+https://sass-lang.com/install/
+直接换个包就好了 他们都是官方维护的 api一致 sass-embedded 有更极致的性能 sass 有更好的兼容性
+npm uninstall sass-embedded
+npm install sass
+
 h5-webpack
 
 ### 更新记录
