@@ -7,6 +7,7 @@ import {
 } from 'vite'
 
 import projectConfig from './config/project.js'
+import dataSrcPlugin from './config/vite-plugin-data-src.js'
 
 const debug = false
 debug && console.log('=====')
@@ -33,10 +34,12 @@ export default defineConfig(({
       open: false,
     },
     build: {
-      emptyOutDir: true,
+      emptyOutDir: true, // 每次打包都会清空项目目录
+      assetsInlineLimit: 0, // 默认 4096,
       outDir: path.join(__dirname, projectConfig.dist)
     },
     plugins: [
+      dataSrcPlugin(),
       // 不支持转换为webp 直接放oss上 调取相应格式的图片即可
       ViteImageOptimizer({
         includePublic: false, // 不处理public目录，默认值是 true
