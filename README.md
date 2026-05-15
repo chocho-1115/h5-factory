@@ -9,9 +9,6 @@ npm install sass-embedded
 https://sass-lang.com/install/
 他们都是官方维护的包， api一致， sass-embedded 有更极致的性能， sass 有更好的兼容性。
 
-
-
-
 ### 更新记录
 
 [CHANGELOG.md](https://github.com/chocho-1115/h5-webp/blob/main/CHANGELOG.md)
