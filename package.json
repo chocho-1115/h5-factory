@@ -10,9 +10,14 @@
     "create": "node server/create.js"
   },
   "devDependencies": {
-    "sass-embedded": "^1.99.0",
+    "sass": "^1.99.0",
     "sharp": "^0.34.5",
     "vite": "^8.0.12",
     "vite-plugin-image-optimizer": "^2.0.3"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router": "^7.15.1"
   }
 }

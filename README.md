@@ -1,14 +1,16 @@
-# h5-webp
+# h5-factory
 
-
-VM initialization failed: Current Mac OS X version 12.0 is lower than minimum supported version 14.0
+scss文件编译成css，默认依赖sass包，这是出于项目体量与兼容性考虑的。如果你想获得更快的编译速度，并且环境允许，你可以更换成sass-embedded。
+``` js
+npm uninstall sass
+npm install sass-embedded
+```
 
 https://sass-lang.com/install/
-直接换个包就好了 他们都是官方维护的 api一致 sass-embedded 有更极致的性能 sass 有更好的兼容性
-npm uninstall sass-embedded
-npm install sass
+他们都是官方维护的包， api一致， sass-embedded 有更极致的性能， sass 有更好的兼容性。
 
-h5-webpack
+
+
 
 ### 更新记录
 
