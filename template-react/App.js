@@ -1,6 +1,6 @@
 import './css/main.scss'
-import {remInit} from '~/common/rem.js'
-import { browserDetect } from '~/common/utils.js'
+import {remInit} from '~/rem.js'
+import { browserDetect } from '~/utils.js'
 import { numClick } from './js/context'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'

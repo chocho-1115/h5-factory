@@ -1,6 +1,6 @@
 
 import * as style from './styles.m.scss' 
-import {formatTime} from '~/common/utils'
+import {formatTime} from '~/utils'
 import Wrap from '@/components/Wrap'
 
 export default () => {
