@@ -1,4 +1,4 @@
-import * as style from './styles.m.scss' 
+import * as style from './styles.module.scss' 
 import { NavLink } from 'react-router'
 
 export default () => {

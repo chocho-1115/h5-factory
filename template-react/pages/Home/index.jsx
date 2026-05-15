@@ -1,5 +1,5 @@
 
-import * as style from './styles.m.scss' 
+import * as style from './styles.module.scss' 
 import {formatTime} from '~/utils'
 import Wrap from '@/components/Wrap'
 
