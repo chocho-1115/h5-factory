@@ -1,13 +1,13 @@
-import '../css/main.scss'
+import './assets/css/main.scss'
 import {queryString, browserDetect, isWechat, isAndroid} from '~/utils.js'
 import {lazyload} from '~/lazyload.js'
 import {remInit} from '~/rem.js'
 import http from '~/http.js'
 import share from '~/share.js'
-import audio from './audio.js'
+import audio from './js/audio.js'
 
-import P from'./page.js'
-import A, {qs} from './activity.js'
+import P from'./js/page.js'
+import A, {qs} from './js/activity.js'
 // import './js/parallelTask_test.js'
 
 const DEBUG = !!queryString('debug')

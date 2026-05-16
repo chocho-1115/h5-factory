@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { numClick } from '@/js/context'
+import { numClick } from '@/assets/js/context'
 import { useContext } from 'react'
 
 import Wrap from '@/components/Wrap'
