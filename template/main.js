@@ -1,3 +1,5 @@
+import {gsap} from 'gsap'
+
 import './assets/css/main.scss'
 import {queryString, browserDetect, isWechat, isAndroid} from '~/utils.js'
 import {lazyload} from '~/lazyload.js'
