@@ -7,9 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "create": "node server/create.js"
+    "create": "node server/create.js",
+    "lint": "node .node/biome.js --biome-lint",
+    "check": "node .node/biome.js --biome-check",
+    "format": "node .node/biome.js --biome-format"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.15",
     "sass": "^1.99.0",
     "sharp": "^0.34.5",
     "vite": "^8.0.12",

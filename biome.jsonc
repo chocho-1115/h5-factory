@@ -1,0 +1,14 @@
+{
+  "files": {
+    "includes": [
+      "**",
+      "!**/libs",
+      "!**/public"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded" // 分号只在需要的地方添加
+    }
+  }
+}
