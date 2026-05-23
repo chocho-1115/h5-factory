@@ -6,8 +6,8 @@ import {
   loadEnv
 } from 'vite'
 
-import projectConfig from './config/project.js'
-import dataSrcPlugin from './config/vite-plugin-data-src.js'
+import projectConfig from './.node/project.js'
+import dataSrcPlugin from './.node/vite-plugin-data-src.js'
 
 const debug = false
 debug && console.log('=====')
@@ -26,7 +26,7 @@ export default defineConfig(({
       alias: {
         // '@': fileURLToPath(new URL('./src', import.meta.url))
 
-        '~': path.join(__dirname, '/common'),
+        '~': path.join(__dirname, '/'),
         '@': path.join(__dirname, projectConfig.src),
       },
     },

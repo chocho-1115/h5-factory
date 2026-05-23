@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "create": "node server/create.js",
+    "create": "node .node/create.js",
     "lint": "node .node/biome.js --biome-lint",
     "check": "node .node/biome.js --biome-check",
     "format": "node .node/biome.js --biome-format"
