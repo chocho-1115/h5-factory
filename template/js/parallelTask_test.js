@@ -1,6 +1,6 @@
 
-import parallelTask from '../common/parallelTask'
-import {getRandomNum} from '../common/utils.js'
+import parallelTask from '~/core/parallelTask'
+import {getRandomNum} from '~/common/utils'
 
 function mockTasks(num) {
     // 模拟请求多个异步任务（可替换成请求api）
