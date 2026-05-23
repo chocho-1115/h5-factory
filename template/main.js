@@ -1,237 +1,248 @@
-import {gsap} from 'gsap'
+import { gsap } from "gsap"
 
-import './assets/css/main.scss'
-import {queryString, browserDetect, isWechat, isAndroid} from '~/common/utils.js'
-import {lazyload} from '~/common/lazyload.js'
-import {remInit} from '~/common/rem.js'
-import http from '~/core/http/'
-import share from '~/common/share.js'
-import audio from './js/audio.js'
+import "./assets/css/main.scss"
+import { lazyload } from "~/common/lazyload.js"
+import { remInit } from "~/common/rem.js"
+import share from "~/common/share.js"
+import {
+	browserDetect,
+	isAndroid,
+	isWechat,
+	queryString,
+} from "~/common/utils.js"
+import http from "~/core/http/"
+import A, { qs } from "./js/activity.js"
+import audio from "./js/audio.js"
+import P from "./js/page.js"
 
-import P from'./js/page.js'
-import A, {qs} from './js/activity.js'
 // import './js/parallelTask_test.js'
 
-const DEBUG = !!queryString('debug')
-const ISLOCAL = window.location.href.indexOf('localhost')>-1 || window.location.href.indexOf('127.0.0.1')>-1 || window.location.href.indexOf('192.168.1.100')>-1
-const OSSURL = ISLOCAL ? '' : ''
+const DEBUG = !!queryString("debug")
+const ISLOCAL =
+	window.location.href.indexOf("localhost") > -1 ||
+	window.location.href.indexOf("127.0.0.1") > -1 ||
+	window.location.href.indexOf("192.168.1.100") > -1
+const OSSURL = ISLOCAL ? "" : ""
 
 const config = {
-    userInfo: {}, // 登录信息
-    // 分享信息
-    shareInfo: {
-        title: '分享标题',
-        desc: '分享副标题',
-        imgUrl: 'https://www.seth5.com/2024/**/static/image/share.jpg', // document.location.hostname 不带端口
-        link: 'https://www.*.com/*/**/',
-    },
-    media: {
-        'bj': null
-    }
+	userInfo: {}, // 登录信息
+	// 分享信息
+	shareInfo: {
+		title: "分享标题",
+		desc: "分享副标题",
+		imgUrl: "https://www.seth5.com/2024/**/static/image/share.jpg", // document.location.hostname 不带端口
+		link: "https://www.*.com/*/**/",
+	},
+	media: {
+		bj: null,
+	},
 }
 
-//  ========= 初始化 http ========= 
-const H = http.create({ baseURL: ''})
+//  ========= 初始化 http =========
+const H = http.create({ baseURL: "" })
 // 添加响应拦截器
-H.interceptors.response.use((res) => {
-    return res.data
-}, (error) => {
-    console.log('响应拦截器-error')
-    return Promise.reject(error)
-})
+H.interceptors.response.use(
+	(res) => {
+		return res.data
+	},
+	(error) => {
+		console.log("响应拦截器-error")
+		return Promise.reject(error)
+	},
+)
 
-//  ========= 分享 ========= 
+//  ========= 分享 =========
 share.init(config.shareInfo)
 share.set()
 
-//  ========= page ========= 
+//  ========= page =========
 P.init({
-    swipeB: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-    ],
-     
-    onChangeBefore(_oldIndex, _newIndex){
-        
-    },
-     
-    onChangeAfter(_oldIndex, _newIndex){
-        
-    }
+	swipeB: [false, false, false, false, false, false, false],
+
+	onChangeBefore(_oldIndex, _newIndex) {},
+
+	onChangeAfter(_oldIndex, _newIndex) {},
 })
 
-//  ========= rem ========= 
+//  ========= rem =========
 remInit({
-    baseWidth: 750,
-    maxWidth: browserDetect().isPc ? 750 : null,
-    viewportMinHeight: 1334,
-    isLandscape: false,
-    // zoomOutCriticalValue: !browserDetect().isPc ? 1 / 1 : null,
-    // zoomOutCriticalValue: 1334/(750-400),
+	baseWidth: 750,
+	maxWidth: browserDetect().isPc ? 750 : null,
+	viewportMinHeight: 1334,
+	isLandscape: false,
+	// zoomOutCriticalValue: !browserDetect().isPc ? 1 / 1 : null,
+	// zoomOutCriticalValue: 1334/(750-400),
 })
 
 // 组装A对象
 Object.assign(A, {
-    data: config,
-    async addBgMp3(){
-        const src = `${OSSURL}/static/media/bj.mp3`
-        const audioConfig = {
-            src,
-            audioContext: null,
-            asPossibleAutoplay: true,
-            autoplay: true,// 音乐是否自动播放
-            loop: true,// 是否循环播放
-        }
-    
-        if(isAndroid()){ // 安卓谷歌浏览器也无法自动播放 只能解决安卓微信 和默认浏览器的自动播放
-            const res = await http.get(src, { responseType: 'arraybuffer' }).catch((e) => { console.log(e) })
-            audioConfig.audioContext = await audio.createContext(res.data)
-        }
-    
-        const m = audio.create(audioConfig)
-    
-        audio.setButton({
-            button: document.getElementById('micBtn'),
-            audio: m,
-        })
-    
-        // 以下方式都能解决ios微信下音频自动播放的问题
-        if(isWechat()) {
-            if(typeof window.WeixinJSBridge === 'object' && typeof window.WeixinJSBridge.invoke === 'function') {  
-                window.WeixinJSBridge.invoke('getNetworkType', {}, () => {
-                    console.log('getNetworkType')
-                    m.play() 
-                })
-            } else {
-                document.addEventListener('WeixinJSBridgeReady', () => {  
-                    console.log('WeixinJSBridgeReady')
-                    m.play()
-                }, false)  
-            }  
-        }
+	data: config,
+	async addBgMp3() {
+		const src = `${OSSURL}/static/media/bj.mp3`
+		const audioConfig = {
+			src,
+			audioContext: null,
+			asPossibleAutoplay: true,
+			autoplay: true, // 音乐是否自动播放
+			loop: true, // 是否循环播放
+		}
 
-        this.data.media.bj = m
-    },
-    addListItem() {
-        const list = document.getElementById('list')
-        const fragment = document.createDocumentFragment()
+		if (isAndroid()) {
+			// 安卓谷歌浏览器也无法自动播放 只能解决安卓微信 和默认浏览器的自动播放
+			const res = await http
+				.get(src, { responseType: "arraybuffer" })
+				.catch((e) => {
+					console.log(e)
+				})
+			audioConfig.audioContext = await audio.createContext(res.data)
+		}
 
-        let n = 0, m = 0
-        const tasks = Array.from({ 
-            length: 50000
-        }, (_, i) => {
-            return () => {
-                n++
-                const ball = document.createElement('span')
-                ball.innerText = i + 1
-                fragment.appendChild(ball)
-            }
-        })
+		const m = audio.create(audioConfig)
 
-        let len = tasks.length
-        while (len > 0) {
-            tasks.splice(len, 0, () => {
-                m++
-                list.appendChild(fragment)
-                fragment.innerHTML = ''
-            })
-            len -= 1000
-        }
-        
-        tasks.push(()=>{
-            console.log('完成', n, m)
-            console.log('dom添加数量', n)
-            console.log('dom操作次数', m)
-        })
-        
-        // for (let i = 0; i < tasks.length; i++) {
-        //     tasks[i]()
-        // }
-        // list.appendChild(fragment)
+		audio.setButton({
+			button: document.getElementById("micBtn"),
+			audio: m,
+		})
 
-        function performTasks(tasks) {
-            requestIdleCallback((deadline) => {
-                // console.log('---0')
-                while (deadline.timeRemaining() > 0 && tasks.length > 0) {
-                    // console.log('---1')
-                    const task = tasks.shift()
-                    task()
-                }
-                if (tasks.length === 0) {
-                    // 
-                }else{
-                    performTasks(tasks)
-                }
-            })
-        }
+		// 以下方式都能解决ios微信下音频自动播放的问题
+		if (isWechat()) {
+			if (
+				typeof window.WeixinJSBridge === "object" &&
+				typeof window.WeixinJSBridge.invoke === "function"
+			) {
+				window.WeixinJSBridge.invoke("getNetworkType", {}, () => {
+					console.log("getNetworkType")
+					m.play()
+				})
+			} else {
+				document.addEventListener(
+					"WeixinJSBridgeReady",
+					() => {
+						console.log("WeixinJSBridgeReady")
+						m.play()
+					},
+					false,
+				)
+			}
+		}
 
-        // 开始执行任务
-        performTasks(tasks)
-    },
-    event() {
-        const shake = qs('.shake')
-        gsap.to(shake, 1.5, {rotate: 360, ease: 'none', repeat: -1})
-        qs('#btn').onclick = this.addListItem
-    },
-    // 进入页面
-    entry() {
-		
-        console.log('entry')
+		this.data.media.bj = m
+	},
+	addListItem() {
+		const list = document.getElementById("list")
+		const fragment = document.createDocumentFragment()
 
-        const page = Number(queryString('page'))||1
-        P.goto(page)
-        this.addBgMp3()  
-        this.event()
+		let n = 0,
+			m = 0
+		const tasks = Array.from(
+			{
+				length: 50000,
+			},
+			(_, i) => {
+				return () => {
+					n++
+					const ball = document.createElement("span")
+					ball.innerText = i + 1
+					fragment.appendChild(ball)
+				}
+			},
+		)
 
-        // weui.toast('兑换成功', {
-        // 	duration: 2000,
-        // 	className: 'weui-toast-text', // penetrate nowrap
-        // })
-        
-        //  .replace(/\s/g, "")
+		let len = tasks.length
+		while (len > 0) {
+			tasks.splice(len, 0, () => {
+				m++
+				list.appendChild(fragment)
+				fragment.innerHTML = ""
+			})
+			len -= 1000
+		}
 
-        
+		tasks.push(() => {
+			console.log("完成", n, m)
+			console.log("dom添加数量", n)
+			console.log("dom操作次数", m)
+		})
 
-    },
+		// for (let i = 0; i < tasks.length; i++) {
+		//     tasks[i]()
+		// }
+		// list.appendChild(fragment)
 
+		function performTasks(tasks) {
+			requestIdleCallback((deadline) => {
+				// console.log('---0')
+				while (deadline.timeRemaining() > 0 && tasks.length > 0) {
+					// console.log('---1')
+					const task = tasks.shift()
+					task()
+				}
+				if (tasks.length === 0) {
+					//
+				} else {
+					performTasks(tasks)
+				}
+			})
+		}
+
+		// 开始执行任务
+		performTasks(tasks)
+	},
+	event() {
+		const shake = qs(".shake")
+		gsap.to(shake, 1.5, { rotate: 360, ease: "none", repeat: -1 })
+		qs("#btn").onclick = this.addListItem
+	},
+	// 进入页面
+	entry() {
+		console.log("entry")
+
+		const page = Number(queryString("page")) || 1
+		P.goto(page)
+		this.addBgMp3()
+		this.event()
+
+		// weui.toast('兑换成功', {
+		// 	duration: 2000,
+		// 	className: 'weui-toast-text', // penetrate nowrap
+		// })
+
+		//  .replace(/\s/g, "")
+	},
 })
 
 // utils.whenDomReady(function(){
 // 在有load页面的时候用
-lazyload('.lazy_load',{
-    baseURL: OSSURL,
-    complete(){
-        const $loadNum = qs('#set_load_num')
-        P.goto(0, {time: 0, onChangeAfter: ()=>{
-            lazyload('.lazy',{
-                baseURL: OSSURL,
-                fileload(item){
-                    $loadNum.innerHTML = `${parseInt(item.progress*100, 10)}%`
-                },
-                complete(){
-                    $loadNum.innerHTML = `${100}%`
-                    setTimeout(()=>{
-                        A.entry()
-                    }, DEBUG || ISLOCAL ? 0 : 800)
-                },
-                minTime: DEBUG || ISLOCAL ? 0 : 1000
-            })
-        }})
-    },
-    minTime: 0
-}) 
- 
+lazyload(".lazy_load", {
+	baseURL: OSSURL,
+	complete() {
+		const $loadNum = qs("#set_load_num")
+		P.goto(0, {
+			time: 0,
+			onChangeAfter: () => {
+				lazyload(".lazy", {
+					baseURL: OSSURL,
+					fileload(item) {
+						$loadNum.innerHTML = `${parseInt(item.progress * 100, 10)}%`
+					},
+					complete() {
+						$loadNum.innerHTML = `${100}%`
+						setTimeout(
+							() => {
+								A.entry()
+							},
+							DEBUG || ISLOCAL ? 0 : 800,
+						)
+					},
+					minTime: DEBUG || ISLOCAL ? 0 : 1000,
+				})
+			},
+		})
+	},
+	minTime: 0,
+})
 
-
-
- 
 // })
- 
 
 /* +function(){
     let end_time = (new Date()).getTime()+10001;//月份是实际月份-1 "10/31/2018 14:51:00"
@@ -245,8 +256,7 @@ lazyload('.lazy_load',{
         }
     });
 }();
-*/	
-
+*/
 
 // 调用手机相册
 // let fileEle = bindFileControl(document.documentElement,'image/*',{
