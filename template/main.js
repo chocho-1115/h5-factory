@@ -1,11 +1,11 @@
 import {gsap} from 'gsap'
 
 import './assets/css/main.scss'
-import {queryString, browserDetect, isWechat, isAndroid} from '~/utils.js'
-import {lazyload} from '~/lazyload.js'
-import {remInit} from '~/rem.js'
-import http from '~/http.js'
-import share from '~/share.js'
+import {queryString, browserDetect, isWechat, isAndroid} from '~/common/utils.js'
+import {lazyload} from '~/common/lazyload.js'
+import {remInit} from '~/common/rem.js'
+import http from '~/core/http/'
+import share from '~/common/share.js'
 import audio from './js/audio.js'
 
 import P from'./js/page.js'
