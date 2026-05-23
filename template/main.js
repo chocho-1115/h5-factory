@@ -33,9 +33,9 @@ const config = {
 //  ========= 初始化 http ========= 
 const H = http.create({ baseURL: ''})
 // 添加响应拦截器
-H.interceptors.response.use(function (res) {
+H.interceptors.response.use((res) => {
     return res.data
-}, function (error) {
+}, (error) => {
     console.log('响应拦截器-error')
     return Promise.reject(error)
 })
@@ -56,11 +56,11 @@ P.init({
         false,
     ],
      
-    onChangeBefore(oldIndex, newIndex){
+    onChangeBefore(_oldIndex, _newIndex){
         
     },
      
-    onChangeAfter(oldIndex, newIndex){
+    onChangeAfter(_oldIndex, _newIndex){
         
     }
 })
@@ -79,7 +79,7 @@ remInit({
 Object.assign(A, {
     data: config,
     async addBgMp3(){
-        let src = OSSURL + '/static/media/bj.mp3'
+        const src = `${OSSURL}/static/media/bj.mp3`
         const audioConfig = {
             src,
             audioContext: null,
@@ -102,23 +102,23 @@ Object.assign(A, {
     
         // 以下方式都能解决ios微信下音频自动播放的问题
         if(isWechat()) {
-            if(typeof window.WeixinJSBridge == 'object' && typeof window.WeixinJSBridge.invoke == 'function') {  
+            if(typeof window.WeixinJSBridge === 'object' && typeof window.WeixinJSBridge.invoke === 'function') {  
                 window.WeixinJSBridge.invoke('getNetworkType', {}, () => {
                     console.log('getNetworkType')
                     m.play() 
                 })
             } else {
-                document.addEventListener('WeixinJSBridgeReady', function() {  
+                document.addEventListener('WeixinJSBridgeReady', () => {  
                     console.log('WeixinJSBridgeReady')
                     m.play()
                 }, false)  
             }  
         }
 
-        this.data.media['bj'] = m
+        this.data.media.bj = m
     },
     addListItem() {
-        let list = document.getElementById('list')
+        const list = document.getElementById('list')
         const fragment = document.createDocumentFragment()
 
         let n = 0, m = 0
@@ -127,7 +127,7 @@ Object.assign(A, {
         }, (_, i) => {
             return () => {
                 n++
-                let ball = document.createElement('span')
+                const ball = document.createElement('span')
                 ball.innerText = i + 1
                 fragment.appendChild(ball)
             }
@@ -174,7 +174,7 @@ Object.assign(A, {
         performTasks(tasks)
     },
     event() {
-        let shake = qs('.shake')
+        const shake = qs('.shake')
         gsap.to(shake, 1.5, {rotate: 360, ease: 'none', repeat: -1})
         qs('#btn').onclick = this.addListItem
     },
@@ -183,7 +183,7 @@ Object.assign(A, {
 		
         console.log('entry')
 
-        let page = Number(queryString('page'))||1
+        const page = Number(queryString('page'))||1
         P.goto(page)
         this.addBgMp3()  
         this.event()
@@ -206,16 +206,16 @@ Object.assign(A, {
 lazyload('.lazy_load',{
     baseURL: OSSURL,
     complete(){
-        let $loadNum = qs('#set_load_num')
-        P.goto(0, {time: 0, onChangeAfter: function(){
+        const $loadNum = qs('#set_load_num')
+        P.goto(0, {time: 0, onChangeAfter: ()=>{
             lazyload('.lazy',{
                 baseURL: OSSURL,
                 fileload(item){
-                    $loadNum.innerHTML = parseInt(item.progress*100)+'%'
+                    $loadNum.innerHTML = `${parseInt(item.progress*100, 10)}%`
                 },
                 complete(){
-                    $loadNum.innerHTML = 100+'%'
-                    setTimeout(function(){
+                    $loadNum.innerHTML = `${100}%`
+                    setTimeout(()=>{
                         A.entry()
                     }, DEBUG || ISLOCAL ? 0 : 800)
                 },
