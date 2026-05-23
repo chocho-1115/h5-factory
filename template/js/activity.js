@@ -1,4 +1,4 @@
-// https://github.com/chocho-1115/h5-webp by 杨燚平 email：849890769@qq.com
+// https://github.com/chocho-1115/h5-factory by 杨燚平 email：849890769@qq.com
 
 document.body.ondragstart = function (e) {
     e.preventDefault()

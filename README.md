@@ -11,7 +11,7 @@ https://sass-lang.com/install/
 
 ### 更新记录
 
-[CHANGELOG.md](https://github.com/chocho-1115/h5-webp/blob/main/CHANGELOG.md)
+[CHANGELOG.md](https://github.com/chocho-1115/h5-factory/blob/main/CHANGELOG.md)
 
 ### 业务场景
 

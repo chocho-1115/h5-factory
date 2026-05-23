@@ -1,4 +1,4 @@
-// https://github.com/chocho-1115/h5-webp
+// https://github.com/chocho-1115/h5-factory
 
 /*
  * @desc 时间格式化
