@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "create": "node .node/create.js",
     "lint": "node .node/biome.js --biome-lint",
-    "check": "node .node/biome.js --biome-check",
-    "format": "node .node/biome.js --biome-format"
+    "format": "node .node/biome.js --biome-format",
+    "check": "node .node/biome.js --biome-check"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
