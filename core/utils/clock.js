@@ -1,4 +1,4 @@
-export function clock (opt){
+function clock (opt){
     opt.framerate = opt.framerate||1
     opt.nowTime = opt.nowTime||new Date().getTime()
     let startTime = new Date().getTime()
@@ -28,6 +28,4 @@ export function clock (opt){
     return timer
 }
 
-export default {
-  clock,
-}
+export default clock

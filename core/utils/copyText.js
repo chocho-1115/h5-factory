@@ -3,7 +3,7 @@
  * @param {string} text 复制内容
  * @param {function} success 成功回调
  */
-export function copyText(text, success) {
+function copyText(text, success) {
     // 数字没有 .length 不能执行selectText 需要转化成字符串
     const textString = text.toString()
     let input = document.querySelector('#copy-input')
@@ -47,6 +47,4 @@ export function copyText(text, success) {
     }
 }
 
-export default {
-  copyText,
-}
+export default copyText

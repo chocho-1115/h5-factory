@@ -23,11 +23,8 @@ import clock from './clock'
 import browserDetect from './browserDetect'
 import bindFileControl from './bindFileControl'
 
-console.log(browserDetect)
-
-export default {
-  
-  isIos,
+export {
+	isIos,
   isAndroid,
   isWechat,
   isMiniProgram,
@@ -50,5 +47,4 @@ export default {
 	clock,
 	browserDetect,
 	bindFileControl,
-
 }

@@ -1,4 +1,4 @@
-export function browserDetect() {
+function browserDetect() {
     let obj = {
         agent: window.navigator.userAgent
     }
@@ -14,6 +14,4 @@ export function browserDetect() {
     return obj
 }
 
-export default {
-  browserDetect,
-}
+export default browserDetect

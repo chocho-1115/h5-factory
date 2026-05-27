@@ -1,4 +1,4 @@
-import {isWechat} from '~/core/utils'
+import * as utils from '~/core/utils'
 
 const config = {
     title: '',
@@ -15,7 +15,7 @@ export default {
 
         Object.assign(config, options)
 
-        if(!isWechat(true)) return
+        if(!utils.isWechat(true)) return
         window.jssdk && window.jssdk.init({debug: false}).then(function(){
            
         }).catch(()=>{ 
@@ -40,7 +40,7 @@ export default {
             }
         }
         // 设置默认分享文案
-        if(isWechat()){
+        if(utils.isWechat()){
             wx.ready(function () {
                 window.jssdk && window.jssdk.share(fxData)
             })

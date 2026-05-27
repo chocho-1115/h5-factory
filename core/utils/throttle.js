@@ -1,5 +1,5 @@
 // 函数节流 多次触发时减少触发频次 此函数会执行第一次触发
-export function throttle (method, delay) {
+function throttle (method, delay) {
     let timer = null
     let starttime = Date.now()
     return function () {
@@ -19,6 +19,4 @@ export function throttle (method, delay) {
     }
 }
 
-export default {
-  throttle,
-}
+export default throttle

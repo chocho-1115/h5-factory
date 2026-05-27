@@ -1,7 +1,5 @@
-export function isAndroid () {
+function isAndroid () {
     return navigator.userAgent.match(/(Android)/i)
 }
 
-export default {
-  isAndroid,
-}
+export default isAndroid

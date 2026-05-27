@@ -1,5 +1,5 @@
 // 是否有上一页
-export function isPreviousPage() {
+function isPreviousPage() {
     if (window.history.length == 1) return false
     const state = window.history.state
     if (state && state.back === null && state.position === 0) {
@@ -8,6 +8,4 @@ export function isPreviousPage() {
     return true
 }
 
-export default {
-  isPreviousPage,
-}
+export default isPreviousPage

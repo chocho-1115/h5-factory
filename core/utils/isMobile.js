@@ -1,5 +1,5 @@
 // 是否为手机号码
-export function isMobile(str) {
+function isMobile(str) {
     if (str == null || str == '') return false
     // let result=str.match(/^((\(\d{2,3}\))|(\d{3}\-))?((13\d{9})|(15\d{9})|(18\d{9}))$/);
     let result = str.match(/^1[3|4|5|6|7|8|9][0-9]\d{8}$/)
@@ -7,6 +7,4 @@ export function isMobile(str) {
     return true
 }
 
-export default {
-  isMobile,
-}
+export default isMobile

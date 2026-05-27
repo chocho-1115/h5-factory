@@ -3,7 +3,7 @@
  * @param {number} endTime 结束时的时间戳
  * @param {object} opt 
  */
-export function countdown(endTime, opt) {
+function countdown(endTime, opt) {
     opt.framerate = opt.framerate || 1
     opt.nowTime = opt.nowTime || new Date().getTime()
     let res = {
@@ -42,6 +42,4 @@ export function countdown(endTime, opt) {
     return timer
 }
 
-export default {
-  countdown,
-}
+export default countdown

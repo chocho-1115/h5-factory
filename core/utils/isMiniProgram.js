@@ -1,4 +1,4 @@
-export function isMiniProgram() {
+function isMiniProgram() {
     let userAgent = navigator.userAgent
     return (
         (/miniProgram/i.test(userAgent) && /micromessenger/i.test(userAgent)) ||
@@ -6,6 +6,4 @@ export function isMiniProgram() {
     )
 }
 
-export default {
-  isMiniProgram,
-}
+export default isMiniProgram

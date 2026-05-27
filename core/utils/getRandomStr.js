@@ -2,7 +2,7 @@
  * @desc 生成随机字符串
  * @param {number} 字符串长度
  */
-export function getRandomStr(len) {
+function getRandomStr(len) {
     len = len || 32
     let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'// 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
     let maxPos = $chars.length
@@ -13,6 +13,4 @@ export function getRandomStr(len) {
     return sttr
 }
 
-export default {
-  getRandomStr,
-}
+export default getRandomStr

@@ -4,7 +4,7 @@
  * @param {number} [timestamp] 时间戳，精确到毫秒
  * @returns {string}
  */
-export function formatTime(format, timestamp) {
+function formatTime(format, timestamp) {
     let d = timestamp ? new Date(timestamp) : new Date()
     let o = {
         'M+': d.getMonth() + 1, // month   
@@ -24,6 +24,4 @@ export function formatTime(format, timestamp) {
     return format
 }
 
-export default {
-  formatTime,
-}
+export default formatTime

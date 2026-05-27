@@ -1,5 +1,5 @@
 // 函数防抖 多次触发只执行最后一次  此函数不执行第一次触发
-export function debounce (method, delay){
+function debounce (method, delay){
     let timeout
     return function () {
         let context = this // 保存this指向
@@ -11,6 +11,4 @@ export function debounce (method, delay){
     }
 }
 
-export default {
-  debounce,
-}
+export default debounce

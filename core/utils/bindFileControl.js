@@ -1,6 +1,6 @@
 // 上传组件
 // <input class="abso upimg" id="upimg" accept="image/*" type="file" style='left:100px;top:100px;width:100px;height:100px;opacity:0.5'/>
-export function bindFileControl(btnEle, accept, opt) {
+function bindFileControl(btnEle, accept, opt) {
     let fileEle = document.createElement('input')
     fileEle.setAttribute('type', 'file')
     fileEle.setAttribute('accept', accept)

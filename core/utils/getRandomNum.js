@@ -4,7 +4,7 @@
  * @param {number} Max 最大值 integerB如果为true 将包含Max本身，否则不包含Max
  * @param {boolean} integerB 是否为整数
  */
-export function getRandomNum(Min, Max, integerB) {
+function getRandomNum(Min, Max, integerB) {
     if (integerB) {
         return (Math.floor(Math.random() * (Max - Min + 1) + Min))
     } else {
@@ -12,6 +12,4 @@ export function getRandomNum(Min, Max, integerB) {
     }
 }
 
-export default {
-  getRandomNum,
-}
+export default getRandomNum

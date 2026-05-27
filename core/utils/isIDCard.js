@@ -1,6 +1,6 @@
 // 是否为身份证
 // 函数参数必须是字符串，因为二代身份证号码是十八位，而在javascript中，十八位的数值会超出计算范围，造成不精确的结果，导致最后两位和计算的值不一致，从而该函数出现错误。
-export function isIDCard(idcode) {
+function isIDCard(idcode) {
     // 加权因子
     let weight_factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
     // 校验码
@@ -44,6 +44,4 @@ export function isIDCard(idcode) {
     return last === last_no && format ? true : false
 }
 
-export default {
-  isIDCard,
-}
+export default isIDCard
