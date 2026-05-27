@@ -4,10 +4,10 @@ import {formatTime} from '~/core/utils'
 import Wrap from '@/components/Wrap'
 
 export default () => {
-    console.log('Home render')
-    return (
-        <Wrap className={style.wrap}>
-            <span>{formatTime('yyyy/MM/dd h:m:s', new Date().getTime())}</span>
-        </Wrap>
-    )
+	console.log('Home render')
+	return (
+		<Wrap className={style.wrap}>
+				<span>{formatTime('yyyy/MM/dd h:m:s', new Date().getTime())}</span>
+		</Wrap>
+	)
 }
