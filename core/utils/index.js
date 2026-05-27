@@ -380,4 +380,3 @@ export function isPreviousPage() {
     }
     return true
 }
-

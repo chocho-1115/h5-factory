@@ -9,7 +9,7 @@ import {
 	isAndroid,
 	isWechat,
 	queryString,
-} from "~/common/utils.js"
+} from "~/core/utils"
 import http from "~/core/http/"
 import A, { qs } from "./js/activity.js"
 import audio from "./js/audio.js"
