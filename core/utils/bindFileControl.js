@@ -34,6 +34,5 @@ function bindFileControl(btnEle, accept, opt) {
     return fileEle
 }
 
-export default {
-  bindFileControl,
-}
+export default bindFileControl
+
