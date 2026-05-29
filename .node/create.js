@@ -4,7 +4,7 @@ import path from 'path'
 
 const __dirname = path.resolve()
 
-let projectName = process.argv[2]
+let projectName = process.env.name
 let srcDir = ''
 let tarDir = path.join(__dirname, './src/'+projectName)
 let isUseReact = !!process.env.npm_config_react
