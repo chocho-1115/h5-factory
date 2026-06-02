@@ -20,11 +20,6 @@ del,ins,u,s,a,a:hover{text-decoration:none;}
 body,textarea,input,button,select,keygen,legend{font:12px/1.5 'Microsoft Yahei' arial,\5b8b\4f53;color:#333;outline:0;}
 a,a:hover{color:#333;}
 
-select, input{
-  -webkit-appearance:none;
-   -moz-appearance:none;
-   		appearance:none;
-}
 html{
 	-webkit-font-smoothing: antialiased;/*字体抗锯齿*/
 	overscroll-behavior: none;
@@ -52,6 +47,12 @@ body{
     filter: gray;opacity:0.5 */
 			
 }
+
+select, input {-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+
+/* placeholder 的颜色 */
+input:-webkit-input-placeholder, textarea:-webkit-input-placeholder{color:#999;}
+select:invalid {color:#999;}
 
 /*选中文本的颜色*/
 ::-moz-selection {background-color: rgba(230,224,203,0.3);color: #fff8e1;}
