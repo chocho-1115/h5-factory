@@ -21,7 +21,7 @@ import isPreviousPage from './isPreviousPage'
 import countdown from './countdown'
 import clock from './clock'
 import browserDetect from './browserDetect'
-import bindFileControl from './bindFileControl'
+import createFileControl from './createFileControl'
 
 export {
 	isIos,
@@ -46,5 +46,5 @@ export {
   countdown,
 	clock,
 	browserDetect,
-	bindFileControl,
+	createFileControl,
 }
