@@ -1,6 +1,11 @@
 
 @import '~/common/css/reset.css';
 
+/* placeholder 的颜色 */
+input:-webkit-input-placeholder, textarea:-webkit-input-placeholder{color:#afafaf;}
+select:invalid {color:#afafaf;}
+select.placeholder {color:#afafaf;}
+
 body{background:#966;font-size:16px;}
 
 .content{height: 100vh;}

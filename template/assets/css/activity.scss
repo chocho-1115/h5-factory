@@ -1,7 +1,9 @@
 
 
-
-
+/* placeholder 的颜色 */
+input:-webkit-input-placeholder, textarea:-webkit-input-placeholder{color:#afafaf;}
+select:invalid {color:#afafaf;}
+select.placeholder {color:#afafaf;}
 
 .penetrate{pointer-events: none;}
 			
