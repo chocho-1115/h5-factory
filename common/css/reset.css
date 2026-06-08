@@ -38,9 +38,9 @@ body{
 select {-webkit-appearance:none;-moz-appearance:none;appearance:none;}
 
 /* placeholder 的颜色 */
-input:-webkit-input-placeholder, textarea:-webkit-input-placeholder{color:#999;}
-select:invalid {color:#999;}
-select.placeholder {color:#999;}
+input:-webkit-input-placeholder, textarea:-webkit-input-placeholder{color:#afafaf;}
+select:invalid {color:#afafaf;}
+select.placeholder {color:#afafaf;}
 
 /* 选中文本的颜色 */
 ::-moz-selection {background-color:rgba(230,224,203,0.3);color:#fff8e1;}
