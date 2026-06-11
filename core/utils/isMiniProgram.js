@@ -1,9 +1,7 @@
 function isMiniProgram() {
-    let userAgent = navigator.userAgent
-    return (
-        (/miniProgram/i.test(userAgent) && /micromessenger/i.test(userAgent)) ||
-        /toutiaomicroapp/i.test(userAgent)
-    )
+	const ua = navigator.userAgent
+	// 微信小程序webview || 头条小程序webview
+	return (/miniProgram/i.test(ua) && /micromessenger/i.test(ua)) || /toutiaomicroapp/i.test(ua)
 }
 
 export default isMiniProgram
