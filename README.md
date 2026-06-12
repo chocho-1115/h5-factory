@@ -1,30 +1,17 @@
 # h5-factory
 
-scss文件编译成css，默认依赖sass包，这是出于项目体量与兼容性考虑的。如果你想获得更快的编译速度，并且环境允许，你可以更换成sass-embedded。
-``` js
-npm uninstall sass
-npm install sass-embedded
-```
+## Business Context
 
-https://sass-lang.com/install/
-他们都是官方维护的包， api一致， sass-embedded 有更极致的性能， sass 有更好的兼容性。
+This project is designed for the development of marketing-oriented H5 pages, which typically exhibit the following characteristics:
 
-### 更新记录
+- Short development and launch cycles
+- Large number of projects
+- Small project scope
 
-[CHANGELOG.md](https://github.com/chocho-1115/h5-factory/blob/main/CHANGELOG.md)
+These characteristics can be summarized as "short, frequent, and fast-paced." From a development perspective, this demands rapid response and efficient delivery. As a result, this project was created to address the following key challenges:
 
-### 业务场景
-
-营销类H5的开发，他们通常有以下特点：
-
-* 开发周期短、上线时间短
-* 项目数量多
-* 项目体量小
-
-总结起来就有“短频快”的特点。基于这些特点，体现在对开发的要求上就是要快速响应并产出，于是就有了这个项目。它主要解决了以下问题：
-
-* 支持一套构建工程管理多个项目，避免需要维护多套构建工程的麻烦；
-* 支持一键生成基础模板，提供原生与react两种模板类型满足不同项目需求，模板封装了一些常用基础功能，在模板下进行二次开发，提升开发效率；
+- Supports managing multiple projects under a single build system, eliminating the need to maintain multiple build configurations.
+- Enables one-click generation of base templates, offering both native and React template options to accommodate different project requirements. The templates come pre-packaged with commonly used foundational features, allowing for secondary development on top of the templates, thereby improving development efficiency.
 
 
 ## Basic Usage
@@ -55,7 +42,7 @@ To start the development server, run:
 name=projectName npm run dev
 ```
 
-### Production Build (Demo Project Packaging)
+### Production Build
 
 To build the demo project for production, execute:
 
@@ -76,3 +63,28 @@ To run the React-based template in the development environment:
 ```bash
 name=template-react npm run dev
 ```
+
+## Dependencies
+
+### Sass
+
+The project uses the `sass` package by default to compile SCSS files into CSS. This decision is based on considerations of project size and compatibility. If you need faster compilation speed and your environment allows it, you can replace `sass` with `sass-embedded`.
+
+```bash
+npm uninstall sass
+npm install sass-embedded
+```
+
+Both packages are officially maintained and share the same API. `sass-embedded` offers better performance, while `sass` provides better compatibility.
+
+[Reference](https://sass-lang.com/install/)
+
+### Adding Dependencies
+
+- When you need to add non-build-related dependencies (e.g., business libraries such as `swiper`, `pixi`, etc.) for a specific project, it is recommended to install the dependency inside the project directory to achieve dependency isolation between projects.
+- When installing dependencies inside a project directory, you may need to add the `--legacy-peer-deps` flag in certain cases. This resolves version conflicts caused by duplicate installations of the same package across project-level and build-level dependencies.
+
+
+## Update Log
+
+[CHANGELOG.md](https://github.com/chocho-1115/h5-factory/blob/main/CHANGELOG.md)
