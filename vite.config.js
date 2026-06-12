@@ -9,15 +9,10 @@ import {
 import projectConfig from './.node/project.js'
 import dataSrcPlugin from './.node/vite-plugin-data-src.js'
 
-const debug = false
-debug && console.log('=====')
-debug && console.log(projectConfig)
-
 export default defineConfig(({
-  command,
-  mode
+  _command,
+  _mode
 }) => {
-  debug && console.log(command, mode)
 
   const config = {
     root: projectConfig.src,
