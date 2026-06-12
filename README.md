@@ -2,11 +2,11 @@
 
 This project is designed for the development of marketing-oriented H5 pages, which typically exhibit the following characteristics:
 
-- Short development cycle
+- Short development cycles
 - Large number of projects
-- Small project size
+- Small individual project scope
 
-These characteristics can be summarized as "short, frequent, and fast-paced." From a development perspective, this demands rapid response and efficient delivery. As a result, this project was created to address the following key challenges:
+From a development perspective, this demands rapid response and efficient delivery. As a result, this project was created to address the following key challenges:
 
 - Supports managing multiple projects under a single build system, eliminating the need to maintain multiple build configurations.
 - Enables one-click generation of base templates, offering both native and React template options to accommodate different project requirements. The templates come pre-packaged with commonly used foundational features, allowing for secondary development on top of the templates, thereby improving development efficiency.
