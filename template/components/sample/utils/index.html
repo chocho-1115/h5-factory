@@ -1,0 +1,58 @@
+<template>
+	<style>
+		.list {
+			margin: .4rem;
+		}
+
+		.list h3 {
+			font-size: .2rem;
+		}
+
+		.list .item {
+			margin-bottom: .25rem;
+			line-height: .6rem;
+			text-align: left;
+			font-size: .26rem;
+			background: rgb(2, 103, 140);
+			padding: 0 .2rem;
+			position: relative;
+			color: #fff;
+		}
+
+		.list .btn {
+			padding: 0 0.2rem;
+			height: .5rem;
+			line-height: .5rem;
+			color: #fff;
+			font-size: .2rem;
+			position: absolute;
+			right: .2rem;
+			top: .05rem;
+			background: rgb(3, 56, 75);
+		}
+
+		.list .description {
+			font-size: .18rem;
+		}
+
+		.list input {
+			background: rgba(0, 0, 0, .5);
+			color: #fff;
+			border: none;
+			height: .5rem;
+			padding: 0 .1rem;
+			width: 30%;
+			border-radius: .1rem;
+		}
+	</style>
+
+	<div class="list">
+
+		<div class="item">copyText（userAgent）<span class="btn" data-key="copyText">点击</span></div>
+		<div class="item">createFileControl（image/*）:<span class="btn" data-key="createFileControl" data-accept="image/*">点击</span></div>
+		<div class="item">createFileControl（video/*）:<span class="btn" data-key="createFileControl" data-accept="video/*">点击</span></div>
+		<div class="item">createFileControl（*/*）:<span class="btn" data-key="createFileControl" data-accept="*/*">点击</span></div>
+
+	</div>
+</template>
+<!-- js 本来是可以写在html里的 但是vite会处理html里的js 并通过src引用 导致js内容获取不到 所以js和html分离开来 -->

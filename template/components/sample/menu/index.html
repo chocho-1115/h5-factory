@@ -1,0 +1,21 @@
+<template>
+	<style lang="scss">
+		.list {
+			position:fixed;
+			right:0;top:50%;
+			transform: translateY(-50%);
+			background: rgb(2, 103, 140);
+			
+			li{
+				color:#fff;
+				
+			}
+		}
+	</style>
+
+	<ul class="list">
+		<li>utils</li>
+		<li>utils</li>
+	</ul>
+</template>
+<!-- js 本来是可以写在html里的 但是vite会处理html里的js 并通过src引用 导致js内容获取不到 所以js和html分离开来 -->
