@@ -1,12 +1,10 @@
 # h5-factory
 
-## Business Context
-
 This project is designed for the development of marketing-oriented H5 pages, which typically exhibit the following characteristics:
 
-- Short development and launch cycles
+- Short development cycle
 - Large number of projects
-- Small project scope
+- Small project size
 
 These characteristics can be summarized as "short, frequent, and fast-paced." From a development perspective, this demands rapid response and efficient delivery. As a result, this project was created to address the following key challenges:
 
