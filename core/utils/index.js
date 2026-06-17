@@ -23,6 +23,8 @@ import clock from './clock'
 import browserDetect from './browserDetect'
 import createFileControl from './createFileControl'
 
+import jsonp from './jsonp'
+
 export {
 	isIos,
   isAndroid,
@@ -47,4 +49,6 @@ export {
 	clock,
 	browserDetect,
 	createFileControl,
+
+  jsonp,
 }
