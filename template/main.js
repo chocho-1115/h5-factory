@@ -4,13 +4,8 @@ import "./assets/css/main.scss"
 import { lazyload } from "~/common/lazyload.js"
 import { remInit } from "~/common/rem.js"
 import share from "~/common/share.js"
-import {
-	browserDetect,
-	isAndroid,
-	isWechat,
-	queryString,
-} from "~/core/utils"
 import http from "~/core/http/"
+import { browserDetect, isAndroid, isWechat, queryString } from "~/core/utils"
 import A, { qs } from "./js/activity.js"
 import audio from "./js/audio.js"
 import P from "./js/page.js"

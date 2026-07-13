@@ -1,8 +1,7 @@
-import {TweenMax} from 'gsap'
+import { TweenMax } from "gsap"
 
-
-const page = document.querySelectorAll('.page')
-let index = -1 
+const page = document.querySelectorAll(".page")
+let index = -1
 let status = -1 // 页面切换状态
 let cutover = true // 页面切换开关 可以用来从外部限制页面是否可以滑动翻页
 
@@ -11,116 +10,115 @@ let onChangeBefore
 let onChangeAfter
 
 const setTips = (B) => {
-    const ele = document.getElementById('upJt')
-    if(!ele) return
-    if(B){
-        ele.style.display = 'block'
-    }else{
-        ele.style.display = 'none'
-    }
+	const ele = document.getElementById("upJt")
+	if (!ele) return
+	if (B) {
+		ele.style.display = "block"
+	} else {
+		ele.style.display = "none"
+	}
 }
 
 export default {
-    getIndex() {
-        return index
-    },
-    setCutover(B) {
-        cutover = !!B
-    },
-    init(opt) {
-        const content = document.querySelector('#content')
-        swipeB = opt.swipeB || []
+	getIndex() {
+		return index
+	},
+	setCutover(B) {
+		cutover = !!B
+	},
+	init(opt) {
+		const content = document.querySelector("#content")
+		swipeB = opt.swipeB || []
 
-        onChangeBefore = opt.onChangeBefore || null
-        onChangeAfter = opt.onChangeAfter || null
+		onChangeBefore = opt.onChangeBefore || null
+		onChangeAfter = opt.onChangeAfter || null
 
-        TweenMax.set(page, {
-            display: 'none',
-            opacity: 0
-        })
+		TweenMax.set(page, {
+			display: "none",
+			opacity: 0,
+		})
 
-        // 设置翻页事件
-        if (window.Hammer && page.length > 0) {
+		// 设置翻页事件
+		if (window.Hammer && page.length > 0) {
+			const mc = new Hammer(content, {
+				// touchAction: 'pan-x pan-y'
+			})
+			mc.get("swipe").set({ velocity: 0, threshold: 30, direction: 30 }) // 修改滑动的速度与方向
 
-            const mc = new Hammer(content, { 
-                // touchAction: 'pan-x pan-y'
-            })
-            mc.get('swipe').set({ velocity: 0, threshold: 30, direction: 30 })// 修改滑动的速度与方向
+			// 下一页
+			mc.on("swipeup", () => {
+				if (!status) return false
+				if (!cutover) return false
+				if (swipeB[index] === false || swipeB[index] < 0) return false
+				const nextPage = page[index].getAttribute("next-page")
+				if (nextPage) {
+					this.goto(Number(nextPage))
+				} else {
+					this.goto(index + 1)
+				}
+			})
+			// 上一页
+			mc.on("swipedown", () => {
+				if (!status) return false
+				if (!cutover) return false
+				if (swipeB[index] === false || swipeB[index] > 0) return false
 
-            // 下一页
-            mc.on('swipeup', () => {
-                if (!status) return false
-                if (!cutover) return false
-                if ( swipeB[index] === false || swipeB[index] < 0) return false
-                const nextPage = page[index].getAttribute('next-page')
-                if (nextPage) {
-                    this.goto(Number(nextPage))
-                } else {
-                    this.goto(index + 1)
-                }
-            })
-            // 上一页
-            mc.on('swipedown', () => {
-                if (!status) return false
-                if (!cutover) return false
-                if ( swipeB[index] === false || swipeB[index] > 0) return false
+				const nextPage = page[index].getAttribute("previous-page")
+				if (nextPage) {
+					this.goto(Number(nextPage))
+				} else {
+					this.goto(index - 1)
+				}
+			})
+		}
+	},
 
-                const nextPage = page[index].getAttribute('previous-page')
-                if (nextPage) {
-                    this.goto(Number(nextPage))
-                } else {
-                    this.goto(index - 1)
-                }
-            })
-        }
-    },    
-    
-    goto(num, opt) {
-        opt = opt || {}
-        const oldPage =  page[ index],
-            newPage =  page[num],
-            time = opt.time === undefined ? 300 : opt.time
-        
-        if ( index === num || num >=  page.length) {
-            // if (opt && opt.onChangeBefore) opt.onChangeBefore()
-            // if (opt && opt.onChangeAfter) opt.onChangeAfter()
-            return false
-        }
-        status = 0
+	goto(num, opt) {
+		opt = opt || {}
+		const oldPage = page[index],
+			newPage = page[num],
+			time = opt.time === undefined ? 300 : opt.time
 
-        setTips(false)
+		if (index === num || num >= page.length) {
+			// if (opt && opt.onChangeBefore) opt.onChangeBefore()
+			// if (opt && opt.onChangeAfter) opt.onChangeAfter()
+			return false
+		}
+		status = 0
 
-        newPage.style.display = 'block'
-        if (opt.onChangeBefore) opt.onChangeBefore( index, num)
-        if ( onChangeBefore)  onChangeBefore( index, num)
+		setTips(false)
 
-        if (oldPage) {
-            TweenMax.to(oldPage, time / 1000, { opacity: 0 })
-        }
+		newPage.style.display = "block"
+		if (opt.onChangeBefore) opt.onChangeBefore(index, num)
+		if (onChangeBefore) onChangeBefore(index, num)
 
-        TweenMax.to(newPage, time / 1000, {
-            opacity: 1, onComplete: () => {
-                newPage.classList.add('show')
-                if(oldPage) oldPage.classList.remove('show')
+		if (oldPage) {
+			TweenMax.to(oldPage, time / 1000, { opacity: 0 })
+		}
 
-                const oldIndex =  index
-                index = num
+		TweenMax.to(newPage, time / 1000, {
+			opacity: 1,
+			onComplete: () => {
+				newPage.classList.add("show")
+				if (oldPage) oldPage.classList.remove("show")
 
-                if (opt.onChangeAfter) opt.onChangeAfter(oldIndex, num)
-                if ( onChangeAfter)  onChangeAfter(oldIndex, num)
-                
-                // display的设置放在onChangeAfter后面是为了防止类似scrollTop的设置失效问题
-                if(oldPage) oldPage.style.display = 'none'
-                const d = swipeB[num]
-                if (opt.upJtB === undefined && (d === 0 || d === 1)) {
-                    setTips(true)
-                } else {
-                    setTips(opt.upJtB)
-                }
+				const oldIndex = index
+				index = num
 
-                status = 1
-            }
-        })
-		
-    },
+				if (opt.onChangeAfter) opt.onChangeAfter(oldIndex, num)
+				if (onChangeAfter) onChangeAfter(oldIndex, num)
+
+				// display的设置放在onChangeAfter后面是为了防止类似scrollTop的设置失效问题
+				if (oldPage) oldPage.style.display = "none"
+				const d = swipeB[num]
+				if (opt.upJtB === undefined && (d === 0 || d === 1)) {
+					setTips(true)
+				} else {
+					setTips(opt.upJtB)
+				}
+
+				status = 1
+			},
+		})
+	},
 }
