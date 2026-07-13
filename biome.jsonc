@@ -10,5 +10,13 @@
     "formatter": {
       "semicolons": "asNeeded" // 分号只在需要的地方添加
     }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "complexity": {
+        "noThisInStatic": "off"
+      }
+    }
   }
 }

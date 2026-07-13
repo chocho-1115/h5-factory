@@ -4,14 +4,14 @@ import {getRandomNum} from '~/common/utils'
 
 function mockTasks(num) {
     // 模拟请求多个异步任务（可替换成请求api）
-    let asyncTasks = []
+    const asyncTasks = []
     for (let i = 0; i < num; i++) {
         ((i)=>{
-            let task = async () => {
+            const task = async () => {
                 console.log('\x1b[36m%s\x1b[0m', '开始:'+i)
                 // 在这里编写异步任务的逻辑
                 return new Promise((resolve)=>{
-                    setTimeout(function(){
+                    setTimeout(() => {
                         console.log('\x1b[32m%s\x1b[0m', '结束:'+i)
                         resolve()
                     }, getRandomNum(2000, 5000, true))

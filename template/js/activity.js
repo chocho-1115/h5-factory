@@ -14,7 +14,7 @@ if(document.querySelector('#fx')){
     let selectAll = document.getElementsByTagName('select')
     function handler(){
         let v = this.value
-        if(v==''){
+        if(v===''){
             this.classList.add('select-placeholder')
         }else{
             this.classList.remove('select-placeholder')

@@ -34,7 +34,7 @@ export default {
             //   console.log(`getting ${propKey}!`);
             //   return Reflect.get(target, propKey, receiver);
             // },
-            set: function (target, propKey, value, receiver) {
+            set: (target, propKey, value, receiver) => {
                 switch(propKey) {
                 case 'loop': source.loop = value; break
                 case 'autoplay': if(value===true) mgr.play(); break
@@ -43,8 +43,8 @@ export default {
             }
         })
 
-        mgr.context.addEventListener('statechange', function(e){
-            if(e.currentTarget.state == 'running'){
+        mgr.context.addEventListener('statechange', (e) => {
+            if(e.currentTarget.state === 'running'){
                 mgr.paused = false
                 mgr.trigger('play', {target: mgr, type: 'play'})
             }else{
@@ -54,7 +54,7 @@ export default {
         }, false)
         
         const buffer = await mgr.context.decodeAudioData(arraybuffer)
-        let source = mgr.context.createBufferSource()
+        const source = mgr.context.createBufferSource()
         source.buffer = buffer
         source.loop = false
         source.start(0)
@@ -71,7 +71,7 @@ export default {
         
         const firstTouch = (e) => {
             document.removeEventListener(e.type, firstTouch)
-            if(audio.button && audio.button.contains(e.target)) return
+            if(audio.button?.contains(e.target)) return
             audio.play()
         }
         if (autoplay && asPossibleAutoplay) {
@@ -97,11 +97,11 @@ export default {
         //     button.classList.add('hide')
         // },false)
         // 暂停
-        audio.addEventListener('pause',function(){
+        audio.addEventListener('pause', ()=>{
             button.classList.add('hide')
         }, false)
         // 播放
-        audio.addEventListener('play',function(){
+        audio.addEventListener('play', ()=>{
             button.classList.remove('hide')
         }, false) 
         
