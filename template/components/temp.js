@@ -2,7 +2,7 @@
 const tempDom = document.createElement('div');
 
 export const createIdByPath = (path) => {
-  return 'id_' + path.split('?')[0].replace(/[^a-zA-Z0-9]/g, '_')
+  return `id_${path.split('?')[0].replace(/[^a-zA-Z0-9]/g, '_') }`
 }
 
 export async function mountTemplate(html) {

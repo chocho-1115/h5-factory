@@ -1,6 +1,6 @@
 // https://github.com/chocho-1115/h5-factory by 杨燚平 email：849890769@qq.com
 
-document.body.ondragstart = function (e) {
+document.body.ondragstart = (e) => {
     e.preventDefault()
 }
 
@@ -10,10 +10,10 @@ if(document.querySelector('#fx')){
     }
 }
 
-+function(){
-    let selectAll = document.getElementsByTagName('select')
++(()=>{
+    const selectAll = document.getElementsByTagName('select')
     function handler(){
-        let v = this.value
+        const v = this.value
         if(v===''){
             this.classList.add('select-placeholder')
         }else{
@@ -24,7 +24,7 @@ if(document.querySelector('#fx')){
         handler.call(ele)
         ele.addEventListener('change', handler)
     })
-}()
+})()
 
 export function qsa(selector, parentNode) {
     return parentNode ? parentNode.querySelectorAll(selector) : document.querySelectorAll(selector)
@@ -42,9 +42,9 @@ export default {
             return
         }
         const fragment = document.createDocumentFragment()
-        let len = options.data.length
+        const len = options.data.length
         for(let i=0;i<len;i++){
-            let item = options.factory(options.data[i], i)
+            const item = options.factory(options.data[i], i)
             if(!item) continue
             if(Object.prototype.toString.call(item) === '[object Array]'){
                 for(let k=0; k<item.length; k++ ){
@@ -55,64 +55,64 @@ export default {
             }
         }
         if(options.clean) options.renderDom.innerHTML = ''
-        options.renderDom && options.renderDom.appendChild(fragment)
-        options.renderCallback && options.renderCallback()
+        options.renderDom?.appendChild(fragment)
+        options.renderCallback?.()
     },
     // 设置省市区联动
-    initHunanAreaPicker: function({city, area, district, depth, defaultValue = []} = {}, callback){
+    initHunanAreaPicker({city, area, district, depth, defaultValue = []} = {}, callback){
         if(!window.HunanAreaData){
             return
         }
-        district.onclick = function () {
+        district.onclick = () => {
             weui.picker(window.HunanAreaData, {
                 depth: depth,
                 container: 'body',
                 // defaultValue: ['430000', '430100', '430101'],
                 defaultValue: defaultValue,
-                onConfirm: function (result) {
+                onConfirm (result) {
                     let str = ''
                     if(city) {
                         city.value = result[0]?result[0].value:''
-                        str += result[0] ? result[0].label + ' ' : ''
+                        str += result[0] ? `${result[0].label} ` : ''
                     }
                     if(area) {
                         area.value = result[1]?result[1].value:''
                         str += result[1] ? result[1].label : ''
                     }
                     district.value = str.trim()
-                    callback && callback(result)
+                    callback?.(result)
                 },
                 id: 'AddressPicker' // 缓存id
             })
         }
     },
     // 设置省市区联动
-    initChinaAreaPicker: function({province, city, area, district, depth, defaultValue = []} = {}, callback){
+    initChinaAreaPicker({province, city, area, district, depth, defaultValue = []} = {}, callback){
         if(!window.ChinaAreaData){
             return
         }
-        district.onclick = function () {
+        district.onclick = () => {
             weui.picker(window.ChinaAreaData, {
                 depth: depth,
                 container: 'body',
                 // defaultValue: ['430000', '430100', '430101'],
                 defaultValue: defaultValue,
-                onConfirm: function (result) {
+                onConfirm (result) {
                     let str = ''
                     if(province) {
                         province.value = result[0]?result[0].value:''
-                        str += result[0] ? result[0].label + ' ' : ''
+                        str += result[0] ? `${result[0].label} ` : ''
                     }
                     if(city) {
                         city.value = result[1]?result[1].value:''
-                        str += result[1] ? result[1].label + ' ' : ''
+                        str += result[1] ? `${result[1].label} ` : ''
                     }
                     if(area) {
                         area.value = result[2]?result[2].value:''
                         str += result[2] ? result[2].label : ''
                     }
                     district.value = str.trim()
-                    callback && callback(result)
+                    callback?.(result)
                 },
                 id: 'AddressPicker' // 缓存id
             })

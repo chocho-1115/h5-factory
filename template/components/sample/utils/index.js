@@ -10,6 +10,10 @@ function mountData(_element, _data) {
 export class sampleRenderer {
   static #id = null; // 私有字段存储ID
 
+  // 占位实例方法，避免 noStaticOnlyClass 警告
+  // _biome-ignore lint/complexity/noStaticOnlyClass: 预留未来扩展
+  _placeholder() {}
+
   static async init() {
     const template = await mountTemplate(templateHtml)
 	  // path = path.split('?')[0].replace(/\.js$/, '.html?raw');

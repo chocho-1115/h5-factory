@@ -12,20 +12,19 @@ const clickCall = {
 	},
 	createFileControl(e) {
 		const accept = e.target.getAttribute('data-accept')
-		const fileEle = utils.createFileControl(accept, { successCallback: function (reader) { }, errorCallback: function (res) { } })
+		const fileEle = utils.createFileControl(accept, { successCallback(_reader) { }, errorCallback(_res) { } })
 		fileEle.click()
 	},
 
 };
 export const event = () => {
 
-	document.querySelector('.list').onclick = function (e) {
+	document.querySelector('.list').onclick = (e) => {
 		var ele = e.target;
 		if (ele.className !== 'btn') return;
 		var key = ele.getAttribute('data-key');
 		if (!key) return;
-		console.log(e)
-		clickCall[key] && clickCall[key](e);
+		clickCall[key]?.(e);
 	}
 
 }
