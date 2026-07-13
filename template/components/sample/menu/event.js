@@ -19,7 +19,7 @@ const clickCall = {
 };
 export const event = () => {
 
-	document.querySelector('.list').onclick = function (e) {
+	document.querySelector('.menu').onclick = function (e) {
 		var ele = e.target;
 		if (ele.className !== 'btn') return;
 		var key = ele.getAttribute('data-key');
