@@ -1,12 +1,12 @@
 import "./assets/css/main.scss"
+import { useState } from "react"
+import { BrowserRouter, Route, Routes } from "react-router"
 import { remInit } from "~/common/rem.js"
 import { browserDetect } from "~/core/utils"
 import { numClick } from "./assets/js/context"
-import { useState } from "react"
-import { BrowserRouter, Routes, Route } from "react-router"
 import Header from "./containers/Header"
-import Index from "./pages/Home"
 import About from "./pages/About"
+import Index from "./pages/Home"
 
 remInit({
 	baseWidth: 750,

@@ -1,5 +1,5 @@
-import * as style from "./styles.module.scss"
 import { NavLink } from "react-router"
+import * as style from "./styles.module.scss"
 
 export default () => {
 	console.log("Header render")

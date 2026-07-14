@@ -1,5 +1,6 @@
 import { lazy } from "react"
-import { NavLink, Link, BrowserRouter, Routes, Route } from "react-router"
+import { BrowserRouter, Link, NavLink, Route, Routes } from "react-router"
+
 // import Index from '../pages/index'
 // const About = lazy(() => import('../pages/About')) // 动态导入
 
