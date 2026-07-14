@@ -186,7 +186,7 @@ const dataSrcImagesPlugin = () => {
     // 在 Rollup 生成完所有 bundle 但尚未写入磁盘时调用。
     // 此时 bundle 对象包含了所有即将输出的 chunk 和 asset，
     // 我们可以在这里直接修改 bundle 内容。
-    generateBundle(options, bundle) {
+    generateBundle(_options, bundle) {
       // 遍历之前记录的所有 HTML 文件
       for (const [htmlFile, refs] of htmlImageRefs) {
         // 将 HTML 绝对路径转为相对于 root 的路径

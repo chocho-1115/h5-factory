@@ -3,10 +3,10 @@ function throttle (method, delay) {
     let timer = null
     let starttime = Date.now()
     return function () {
-        let curTime = Date.now() // 当前时间
+        const curTime = Date.now() // 当前时间
         let remaining = delay - (curTime - starttime)  // 从上一次到现在，还剩下多少多余时间
-        let context = this
-        let args = arguments
+        const context = this
+        const args = arguments
         clearTimeout(timer)
         if (remaining <= 0) {
             method.apply(context, args)

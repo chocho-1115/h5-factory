@@ -25,7 +25,7 @@ export function remInit ({
     // 添加横屏标识
     if (isLandscape) docEl.classList.add('landscape')
 
-    window.addEventListener(resizeEvt, function () {
+    window.addEventListener(resizeEvt, () => {
         if (timer) clearTimeout(timer)
         // 下面的延迟是必要的
         // ios 下 resize|orientationchange 事件 需要延迟1秒 不然rem适配时获取的屏幕宽高值不对 比如在ios的safari下 pc手机调试模式下 或者部分安卓机下
@@ -69,7 +69,7 @@ export function remInit ({
 
     function recalc(opt) {
         // 可配置参数
-        let viewportMinHeight = opt.viewportMinHeight,
+        const viewportMinHeight = opt.viewportMinHeight,
             baseWidth = opt.baseWidth,
             maxWidth = opt.maxWidth ? opt.maxWidth : 10000
 

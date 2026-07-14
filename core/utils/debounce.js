@@ -2,10 +2,9 @@
 function debounce (method, delay){
     let timeout
     return function (...args) {
-        const context = this // 保存this指向
         clearTimeout(timeout)
         timeout = setTimeout(()=>{
-            method.apply(context, args)
+            method.apply(this, args)
         }, delay)
     }
 }

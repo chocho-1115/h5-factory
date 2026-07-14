@@ -4,10 +4,10 @@ import path from 'path'
 
 const __dirname = path.resolve()
 
-let projectName = process.env.name
+const projectName = process.env.name
 let srcDir = ''
-let tarDir = path.join(__dirname, './src/'+projectName)
-let isUseReact = !!process.env.npm_config_react
+const tarDir = path.join(__dirname, './src/'+projectName)
+const isUseReact = !!process.env.npm_config_react
 
 if(!projectName){
     throw '新建项目名称不能为空：npm run create projectName'
@@ -22,7 +22,7 @@ if(isUseReact){
 if(fs.existsSync(tarDir)){
     throw tarDir + ' 目录已存在'
 }else{
-    fs.mkdir(tarDir, {recursive: true}, function(err) {
+    fs.mkdir(tarDir, {recursive: true}, (err) => {
         if (err) {
             console.log(err)
             return
@@ -37,34 +37,34 @@ if(fs.existsSync(tarDir)){
 
 // 将源文件拷贝到目标文件
 // 将srcPath路径的文件复制到tarPath
-const copyFile = function(srcPath, tarPath, cb) {
-    let rs = fs.createReadStream(srcPath)
-    rs.on('error', function(err) {
+const copyFile = (srcPath, tarPath, cb) => {
+    const rs = fs.createReadStream(srcPath)
+    rs.on('error', (err) => {
         if (err) {
             console.log('read error', srcPath)
         }
-        cb && cb(err)
+        cb?.(err)
     })
  
-    let ws = fs.createWriteStream(tarPath)
-    ws.on('error', function(err) {
+    const ws = fs.createWriteStream(tarPath)
+    ws.on('error', (err) => {
         if (err) {
             console.log('write error', tarPath)
         }
-        cb && cb(err)
+        cb?.(err)
     })
-    ws.on('close', function(ex) {
-        cb && cb(ex)
+    ws.on('close', (ex) => {
+        cb?.(ex)
     })
  
     rs.pipe(ws)
 }
 
 // 将srcDir文件下的文件、文件夹递归的复制到tarDir下
-const copyFolder = function(srcDir, tarDir, cb) {
-    fs.readdir(srcDir, function(err, files) {
+const copyFolder = (srcDir, tarDir, cb) => {
+    fs.readdir(srcDir, (err, files) => {
         let count = 0
-        let checkEnd = function() {
+        const checkEnd = () => {
             ++count === files.length && cb && cb()
         }
  
@@ -73,16 +73,16 @@ const copyFolder = function(srcDir, tarDir, cb) {
             return
         }
  
-        files.forEach(function(file) {
-            let srcPath = path.join(srcDir, file)
-            let tarPath = path.join(tarDir, file)
+        files.forEach((file) => {
+            const srcPath = path.join(srcDir, file)
+            const tarPath = path.join(tarDir, file)
  
-            fs.stat(srcPath, function(err, stats) {
+            fs.stat(srcPath, (_err, stats) => {
                 if (stats.isDirectory()) {
                     
                     console.log('mkdir', tarPath)
 
-                    fs.mkdir(tarPath, function(err) {
+                    fs.mkdir(tarPath, (err) => {
                         if (err) {
                             console.log(err)
                             return

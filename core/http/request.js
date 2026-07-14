@@ -43,7 +43,7 @@ export function mergeConfig(config1, config2){
     config1 = config1 || {}
     config2 = config2 || {}
     const headers = Object.assign({}, config1.headers, config2.headers)
-    let config = Object.assign({}, config1, config2)
+    const config = Object.assign({}, config1, config2)
     config.headers = headers
     return config
 }
@@ -57,11 +57,11 @@ export function dispatchRequest(config){
 
     config.method = config.method ? config.method.toUpperCase() : 'GET'
 
-    const promise = new Promise(function (resolve, reject) {
+    const promise = new Promise((resolve, reject) => {
 
         let isSettled = false
         // 请求发送之前出错了
-        const sendBeforeError = function (code, message = ''){
+        const sendBeforeError = (code, message = '') => {
             reject({
                 code,
                 message: ERROR_INFO[code] || message,
@@ -70,7 +70,7 @@ export function dispatchRequest(config){
             })
         }
         // 请求发生之后 
-        const onLoadendHandler = function () {
+        const onLoadendHandler = () => {
             if (this.readyState !== 4) return
             if(isSettled) return
             isSettled = true
@@ -97,7 +97,7 @@ export function dispatchRequest(config){
             }
         }
         // 请求发生之后 错误事件发生时
-        const onErrorHandler = function (e) {    
+        const onErrorHandler = (e) => {    
             if(isSettled) return
             isSettled = true
             const code = `REQUEST-EVENT-${e.type.toUpperCase()}`
@@ -114,18 +114,18 @@ export function dispatchRequest(config){
         const client = new XMLHttpRequest()
         // 所有请求都可以通过url传递数据；只有post、put和patch请求可以发送body
         if (params) {
-            let info = url.split('?')
+            const info = url.split('?')
             url = info[0]
 
-            let urlParams = {}
-            info[1] && info[1].replace(/([^=]+)=(\w+)/g, function(_, key, value) {
+            const urlParams = {}
+            info[1]?.replace(/([^=]+)=(\w+)/g, (_, key, value) => {
                 urlParams[key] = value
             })
 
             params = Object.assign(urlParams, params)
 
             let str = ''
-            for (let name in params) {
+            for (const name in params) {
                 str += name + '=' + params[name] + '&'
             }
             if(str.length > 0) str = str.substring(0, str.length - 1)
@@ -148,10 +148,10 @@ export function dispatchRequest(config){
                 throw new Error("INVALID-URL"); // 后面的代码不执行
             }
             client.timeout = Math.max(2000, config.timeout)
-            client.open(config.method, url.substring(0,4) == 'http' ? url : config.baseURL + url, config.async)
+            client.open(config.method, url.substring(0,4) === 'http' ? url : config.baseURL + url, config.async)
             client.responseType = config.responseType
             
-            for (let name in headers) {
+            for (const name in headers) {
                 client.setRequestHeader(name, headers[name])
             }
 
