@@ -1,10 +1,9 @@
 import path from "node:path"
-import { ViteImageOptimizer } from "vite-plugin-image-optimizer"
-
 import {
 	defineConfig,
 	// loadEnv
 } from "vite"
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer"
 
 import projectConfig from "./.node/project.js"
 import dataSrcPlugin from "./.node/vite-plugin-data-src.js"

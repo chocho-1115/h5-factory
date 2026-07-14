@@ -1,50 +1,47 @@
-import isIos from "./isIos"
-import isAndroid from "./isAndroid"
-import isWechat from "./isWechat"
-import isMiniProgram from "./isMiniProgram"
-import isEmail from "./isEmail"
-import isMobile from "./isMobile"
-import isIDCard from "./isIDCard"
-
+import browserDetect from "./browserDetect"
+import clock from "./clock"
+import copyText from "./copyText"
+import countdown from "./countdown"
+import createFileControl from "./createFileControl"
+import debounce from "./debounce"
+import delay from "./delay"
+import formatTime from "./formatTime"
 import getRandomNum from "./getRandomNum"
 import getRandomStr from "./getRandomStr"
-
-import copyText from "./copyText"
-import formatTime from "./formatTime"
+import isAndroid from "./isAndroid"
+import isEmail from "./isEmail"
+import isIDCard from "./isIDCard"
+import isIos from "./isIos"
+import isMiniProgram from "./isMiniProgram"
+import isMobile from "./isMobile"
+import isPreviousPage from "./isPreviousPage"
+import isWechat from "./isWechat"
+import jsonp from "./jsonp"
 import matchUserAgent from "./matchUserAgent"
 import queryString from "./queryString"
 import throttle from "./throttle"
-import debounce from "./debounce"
-import delay from "./delay"
-import isPreviousPage from "./isPreviousPage"
-import countdown from "./countdown"
-import clock from "./clock"
-import browserDetect from "./browserDetect"
-import createFileControl from "./createFileControl"
-
-import jsonp from "./jsonp"
 
 export {
-	isIos,
-	isAndroid,
-	isWechat,
-	isMiniProgram,
-	isEmail,
-	isMobile,
-	isIDCard,
+	browserDetect,
+	clock,
+	copyText,
+	countdown,
+	createFileControl,
+	debounce,
+	delay,
+	formatTime,
 	getRandomNum,
 	getRandomStr,
-	copyText,
-	formatTime,
+	isAndroid,
+	isEmail,
+	isIDCard,
+	isIos,
+	isMiniProgram,
+	isMobile,
+	isPreviousPage,
+	isWechat,
+	jsonp,
 	matchUserAgent,
 	queryString,
 	throttle,
-	debounce,
-	delay,
-	isPreviousPage,
-	countdown,
-	clock,
-	browserDetect,
-	createFileControl,
-	jsonp,
 }

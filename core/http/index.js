@@ -1,4 +1,4 @@
-import { defaultsConfig, mergeConfig, dispatchRequest } from "./request"
+import { defaultsConfig, dispatchRequest, mergeConfig } from "./request"
 
 // 拦截器构造函数
 function InterceptorManager() {
