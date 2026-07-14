@@ -3,7 +3,7 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 import {
   defineConfig,
-  loadEnv
+  // loadEnv
 } from 'vite'
 
 import projectConfig from './.node/project.js'

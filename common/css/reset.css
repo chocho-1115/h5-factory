@@ -26,7 +26,6 @@ body{
 		    user-select:none;
 	-webkit-user-drag: none;/*禁止拖拽*/
 	    -ms-user-drag: none;
-		    user-drag: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
 

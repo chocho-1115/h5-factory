@@ -36,7 +36,7 @@ function Http(config = {}){
 }
 Http.prototype.request = function(config = {}){
     // 拦截器和请求组装队列
-    let chain = [dispatchRequest.bind(this), undefined] // 必须成对出现的
+    const chain = [dispatchRequest.bind(this), undefined] // 必须成对出现的
 
     // 请求拦截
     this.interceptors.request.handlers.forEach(interceptor => {
@@ -81,9 +81,9 @@ Array.prototype.forEach.call([
 // /////// 生成导出对象
 function createInstance(config) {
     // 实例化一个对象
-    let context = new Http(config) // context.get（） context.post(), 但是不能当作函数使用 context() X
+    const context = new Http(config) // context.get（） context.post(), 但是不能当作函数使用 context() X
     // 创建请求函数
-    let instance = Http.prototype.request.bind(context)// 等价 context.request(), 但是不能当作对象使用 属性和方法
+    const instance = Http.prototype.request.bind(context)// 等价 context.request(), 但是不能当作对象使用 属性和方法
     // 把Http.prototype对象的方法添加到instance函数对象上
     Object.keys(Http.prototype).forEach(key => {
         instance[key] = Http.prototype[key].bind(context)
@@ -95,10 +95,10 @@ function createInstance(config) {
     return instance
 }
 
-let http = createInstance(defaultsConfig)
+const http = createInstance(defaultsConfig)
 
 // 构建新实例 这里只需要绑定在导出的http上 不需要绑定在用户创建的每个实例上
-http.create = function(config = {}){
+http.create = (config = {}) => {
     return createInstance(mergeConfig(http.defaults, config)) // http.defaults 是全局的默认配置
 }
 

@@ -46,15 +46,15 @@ export function compressionPIC(src, opt, callback) {
         // 画布尺寸 输出尺寸
         let canW = ew, canH = eh
         let rotate = 0
-        if (exif_orientation == 6) {
+        if (exif_orientation === 6) {
             canW = eh
             canH = ew
             rotate = 90
-        } else if (exif_orientation == 8) {
+        } else if (exif_orientation === 8) {
             canW = eh
             canH = ew
             rotate = -90
-        } else if (exif_orientation == 3) {
+        } else if (exif_orientation === 3) {
             rotate = 180
         }
 
@@ -74,7 +74,7 @@ export function compressionPIC(src, opt, callback) {
             result: canvas.toDataURL(type, quality)
         })
         // 导出 blob
-        callback && encode === 'blob' && canvas.toBlob(function (blob) {
+        callback && encode === 'blob' && canvas.toBlob((blob) => {
             callback({
                 width: canW,
                 height: canH,
@@ -82,9 +82,9 @@ export function compressionPIC(src, opt, callback) {
             })
         }, type)
         // 导出 file
-        callback && encode === 'file' && canvas.toBlob(function (blob) {
-            let filesName = getRandomStr(8)
-            let files = new File([blob], filesName, { type: type })
+        callback && encode === 'file' && canvas.toBlob((blob) => {
+            const filesName = getRandomStr(8)
+            const files = new File([blob], filesName, { type: type })
             callback({
                 width: canW,
                 height: canH,

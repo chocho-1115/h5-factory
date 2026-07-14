@@ -117,7 +117,7 @@ const dataSrcImagesPlugin = () => {
         // 捕获组 ([^"']+?) 非贪婪匹配属性值，不跨引号
         const regex = /data-src=["']([^"']+?)["']/g
 
-        let match
+        let match = regex.exec(content)
         // 当前 HTML 文件中所有 data-src 引用的信息列表
         const refs = []
 
@@ -125,7 +125,7 @@ const dataSrcImagesPlugin = () => {
         htmlImageRefs.set(htmlFile, refs)
 
         // 循环匹配当前 HTML 中所有 data-src 属性
-        while ((match = regex.exec(content)) !== null) {
+        while (match !== null) {
           // match[0] = 完整匹配字符串
           // match[1] = 捕获组：data-src 的属性值
           const raw = match[1].trim()
@@ -175,6 +175,8 @@ const dataSrcImagesPlugin = () => {
             query: queryString ? '?' + queryString : '', // 保留查询参数
             refId,          // Rollup asset 引用 ID，用于获取 hash 后路径
           })
+
+          match = regex.exec(content)
         }
       }
     },

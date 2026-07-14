@@ -65,7 +65,7 @@ const copyFolder = function(srcDir, tarDir, cb) {
     fs.readdir(srcDir, function(err, files) {
         let count = 0
         let checkEnd = function() {
-            ++count == files.length && cb && cb()
+            ++count === files.length && cb && cb()
         }
  
         if (err) {

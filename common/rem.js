@@ -56,7 +56,7 @@ export function remInit ({
                 baseWidth: viewportMinHeight,
                 maxWidth: viewportMinHeight
             })
-        } else if (window.orientation == 90 || window.orientation == -90) {
+        } else if (window.orientation === 90 || window.orientation === -90) {
             // console.log('===横着的==='+window.orientation)
             docEl.classList.remove('rotateWin')
             recalc({
@@ -78,8 +78,8 @@ export function remInit ({
         if (viewportMinHeight && docEl.clientWidth / docEl.clientHeight > (zoomOutCriticalValue || baseWidth / viewportMinHeight)) {
             zoomOutByHeight = true
         }
-        let clientWidth = docEl.clientWidth
-        let clientHeight = docEl.clientHeight
+        const clientWidth = docEl.clientWidth
+        const clientHeight = docEl.clientHeight
         let v
         if (zoomOutByHeight) {
             v = 100 * (clientHeight / viewportMinHeight)

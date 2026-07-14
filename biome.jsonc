@@ -3,7 +3,8 @@
     "includes": [
       "**",
       "!**/libs",
-      "!**/public"
+      "!**/public",
+      "!**/.bak"
     ]
   },
   "javascript": {

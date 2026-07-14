@@ -11,38 +11,38 @@ const config = {
 
 export default {
     // 微信初始化分享
-    init: function(options){
+    init(options){
 
         Object.assign(config, options)
 
         if(!utils.isWechat(true)) return
-        window.jssdk && window.jssdk.init({debug: false}).then(function(){
+        window.jssdk?.init({debug: false}).then(() => {
            
         }).catch(()=>{ 
             
         })
     },
     set(options = {}){
-        let fxData = {
+        const fxData = {
             title: options.title || config.title, 
             desc: options.desc || config.desc,
             imgUrl: options.imgUrl || config.imgUrl,
             link: options.link || config.link,
-            success: function () {
+            success() {
                 console.log('分享成功回调')
-                options.success && options.success()
-                config.success && config.success()
+                options.success?.()
+                config.success?.()
             },
-            cancel: function () {
+            cancel() {
                 console.log('分享取消回调')
-                options.cancel && options.cancel()
-                config.cancel && config.cancel()
+                options.cancel?.()
+                config.cancel?.()
             }
         }
         // 设置默认分享文案
         if(utils.isWechat()){
-            wx.ready(function () {
-                window.jssdk && window.jssdk.share(fxData)
+            wx.ready(() => {
+                window.jssdk?.share(fxData)
             })
         }
         

@@ -1,9 +1,9 @@
 // 预载器
 export function preload(srcArr, params) {
-    if (typeof (srcArr) == 'string') {
+    if (typeof (srcArr) === 'string') {
         srcArr = [{ path: srcArr }]
     };
-    if (srcArr.length == 0) { params.complete && params.complete({}); return false };
+    if (srcArr.length === 0) { params.complete && params.complete({}); return false };
     let num = 0,
         imgArrObj = {},
         minTime = params.minTime || 0,
@@ -14,7 +14,7 @@ export function preload(srcArr, params) {
 
     for (let i = 0; i < len; i++) {
         (function (i) {
-            if (typeof (srcArr[i]) == 'string') srcArr[i] = { path: srcArr[i], name: i }
+            if (typeof (srcArr[i]) === 'string') srcArr[i] = { path: srcArr[i], name: i }
             let newImg = new Image()
             if (srcArr[i].crossOrigin) newImg.crossOrigin = srcArr[i].crossOrigin
             newImg.onload = newImg.onerror = function (e) {

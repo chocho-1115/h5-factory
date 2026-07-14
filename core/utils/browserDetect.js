@@ -1,5 +1,5 @@
 function browserDetect() {
-    let obj = {
+    const obj = {
         agent: window.navigator.userAgent
     }
     obj.isWindowPhone = (obj.agent.indexOf('IEMobile') > -1) || (obj.agent.indexOf('Windows Phone') > -1)

@@ -5,8 +5,8 @@
  */
 function countdown(endTime, opt) {
     opt.framerate = opt.framerate || 1
-    opt.nowTime = opt.nowTime || new Date().getTime()
-    let res = {
+    opt.nowTime = opt.nowTime || Date.now()
+    const res = {
         death: false,
         day: 0,
         hour: 0,
@@ -15,7 +15,7 @@ function countdown(endTime, opt) {
         millisecond: 0
     }
     let sys_millisecond = endTime - opt.nowTime
-    let sys_millisecond_speed = 1000 / opt.framerate
+    const sys_millisecond_speed = 1000 / opt.framerate
     function anim() {
         if (sys_millisecond < sys_millisecond_speed) {
             clearInterval(timer)
@@ -37,7 +37,7 @@ function countdown(endTime, opt) {
             if (opt.onUpdate) opt.onUpdate(res)
         }
     }
-    let timer = setInterval(anim, sys_millisecond_speed)
+    const timer = setInterval(anim, sys_millisecond_speed)
     anim()
     return timer
 }
