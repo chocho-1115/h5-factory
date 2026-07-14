@@ -86,7 +86,7 @@ export function remInit ({
         } else {
             v = 100 * (Math.min(clientWidth, maxWidth) / baseWidth)
         }
-        docEl.style.fontSize = v + 'px'
+        docEl.style.fontSize = `${v}px`
         docEl.setAttribute('data', v)
 
         // 解决部分 Android 手机(例如华为) 通过 rem 计算的宽度和手机上实际显示的宽度不一致

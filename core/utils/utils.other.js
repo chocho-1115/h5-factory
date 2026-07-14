@@ -1,19 +1,19 @@
 
-let utils = {
+const utils = {
     // window.onload
     whenWindowLoad(func) {
-        let oldonload = window.onload
-        if (typeof window.onload != 'function') {
+        const oldonload = window.onload
+        if (typeof window.onload !== 'function') {
             window.onload = func
         } else {
-            window.onload = function () {
+            window.onload = () => {
                 oldonload()
                 func()
             }
         }
     },
     // jq的document.ready
-    whenDomReady: function () {
+    whenDomReady: (() => {
         let funcs = []
         let ready = false // 当触发事件处理程序时,切换为true
 
@@ -46,22 +46,22 @@ let utils = {
             window.attachEvent('onload', handler)
         }
         // 返回whenDomReady()函数
-        return function (fn) {
+        return (fn) => {
             if (ready) { fn.call(document) }
             else { funcs.push(fn) }
         }
-    }(),
+    })(),
     // 固定宽度适配时高度不够
     setViewportMinHeight(minH, callback) {
-        let metaEle = document.getElementById('viewEle')
+        const metaEle = document.getElementById('viewEle')
         if (!metaEle) return
-        let winW = document.documentElement.clientWidth
-        let winH = document.documentElement.clientHeight
+        const winW = document.documentElement.clientWidth
+        const winH = document.documentElement.clientHeight
         if (minH && winH < minH) {
-            let w = minH * winW / winH
-            document.getElementById('viewEle').setAttribute('content', 'width=' + w + ', user-scalable=no,target-densitydpi = device-dpi')
+            const w = minH * winW / winH
+            document.getElementById('viewEle').setAttribute('content', `width=${w}, user-scalable=no,target-densitydpi = device-dpi`)
         }
-        callback && callback()
+        callback?.()
     },
     
     // 获取浏览器前缀
@@ -73,16 +73,16 @@ let utils = {
 			不过这些浏览器没有必要获取浏览器前缀了 浏览器前缀主要用于css3 而这些老古董浏览器不支持大部分的css3；
 		*/
         if (window.opera || !window.getComputedStyle) return null
-        let styles = window.getComputedStyle(document.documentElement, ''),
+        const styles = window.getComputedStyle(document.documentElement, ''),
             pre = (Array.prototype.slice
                 .call(styles)
                 .join('')
                 .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1],
-            dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1]
+            dom = ('WebKit|Moz|MS|O').match(new RegExp(`(${pre})`, 'i'))[1]
         return {
             dom: dom,
             lowercase: pre,
-            css: '-' + pre + '-',
+            css: `-${pre}-`,
             js: pre[0].toUpperCase() + pre.substring(1)
         }
     },
@@ -90,22 +90,22 @@ let utils = {
 
     // 获取农历日期
     getLunarDay(solarYear, solarMonth, solarDay) {
-        solarMonth = (parseInt(solarMonth) > 0) ? (solarMonth - 1) : 11
-        let madd = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
-        let tgString = '甲乙丙丁戊己庚辛壬癸'
-        let dzString = '子丑寅卯辰巳午未申酉戌亥'
-        let numString = '一二三四五六七八九十'
-        let monString = '正二三四五六七八九十冬腊'
+        solarMonth = (parseInt(solarMonth, 10) > 0) ? (solarMonth - 1) : 11
+        const madd = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
+        const tgString = '甲乙丙丁戊己庚辛壬癸'
+        const dzString = '子丑寅卯辰巳午未申酉戌亥'
+        const numString = '一二三四五六七八九十'
+        const monString = '正二三四五六七八九十冬腊'
         // let weekString = "日一二三四五六";
-        let sx = '鼠牛虎兔龙蛇马羊猴鸡狗猪'
+        const sx = '鼠牛虎兔龙蛇马羊猴鸡狗猪'
         let cYear, cMonth, cDay, TheDate
-        let CalendarData = new Array(0xA4B, 0x5164B, 0x6A5, 0x6D4, 0x415B5, 0x2B6, 0x957, 0x2092F, 0x497, 0x60C96, 0xD4A, 0xEA5, 0x50DA9, 0x5AD, 0x2B6, 0x3126E, 0x92E, 0x7192D, 0xC95, 0xD4A, 0x61B4A, 0xB55, 0x56A, 0x4155B, 0x25D, 0x92D, 0x2192B, 0xA95, 0x71695, 0x6CA, 0xB55, 0x50AB5, 0x4DA, 0xA5B, 0x30A57, 0x52B, 0x8152A, 0xE95, 0x6AA, 0x615AA, 0xAB5, 0x4B6, 0x414AE, 0xA57, 0x526, 0x31D26, 0xD95, 0x70B55, 0x56A, 0x96D, 0x5095D, 0x4AD, 0xA4D, 0x41A4D, 0xD25, 0x81AA5, 0xB54, 0xB6A, 0x612DA, 0x95B, 0x49B, 0x41497, 0xA4B, 0xA164B, 0x6A5, 0x6D4, 0x615B4, 0xAB6, 0x957, 0x5092F, 0x497, 0x64B, 0x30D4A, 0xEA5, 0x80D65, 0x5AC, 0xAB6, 0x5126D, 0x92E, 0xC96, 0x41A95, 0xD4A, 0xDA5, 0x20B55, 0x56A, 0x7155B, 0x25D, 0x92D, 0x5192B, 0xA95, 0xB4A, 0x416AA, 0xAD5, 0x90AB5, 0x4BA, 0xA5B, 0x60A57, 0x52B, 0xA93, 0x40E95)
+        const CalendarData = [0xA4B, 0x5164B, 0x6A5, 0x6D4, 0x415B5, 0x2B6, 0x957, 0x2092F, 0x497, 0x60C96, 0xD4A, 0xEA5, 0x50DA9, 0x5AD, 0x2B6, 0x3126E, 0x92E, 0x7192D, 0xC95, 0xD4A, 0x61B4A, 0xB55, 0x56A, 0x4155B, 0x25D, 0x92D, 0x2192B, 0xA95, 0x71695, 0x6CA, 0xB55, 0x50AB5, 0x4DA, 0xA5B, 0x30A57, 0x52B, 0x8152A, 0xE95, 0x6AA, 0x615AA, 0xAB5, 0x4B6, 0x414AE, 0xA57, 0x526, 0x31D26, 0xD95, 0x70B55, 0x56A, 0x96D, 0x5095D, 0x4AD, 0xA4D, 0x41A4D, 0xD25, 0x81AA5, 0xB54, 0xB6A, 0x612DA, 0x95B, 0x49B, 0x41497, 0xA4B, 0xA164B, 0x6A5, 0x6D4, 0x615B4, 0xAB6, 0x957, 0x5092F, 0x497, 0x64B, 0x30D4A, 0xEA5, 0x80D65, 0x5AC, 0xAB6, 0x5126D, 0x92E, 0xC96, 0x41A95, 0xD4A, 0xDA5, 0x20B55, 0x56A, 0x7155B, 0x25D, 0x92D, 0x5192B, 0xA95, 0xB4A, 0x416AA, 0xAD5, 0x90AB5, 0x4BA, 0xA5B, 0x60A57, 0x52B, 0xA93, 0x40E95]
 
         function GetBit(m, n) {
             return (m >> n) & 1
         }
-        function e2c() {
-            TheDate = (arguments.length != 3) ? new Date() : new Date(arguments[0], arguments[1], arguments[2])
+        function e2c(...args) {
+            TheDate = (args.length !== 3) ? new Date() : new Date(args[0], args[1], args[2])
             let total, m, n, k
             let isEnd = false
             let tmp = TheDate.getYear()
@@ -114,7 +114,7 @@ let utils = {
             }
             total = (tmp - 1921) * 365 + Math.floor((tmp - 1921) / 4) + madd[TheDate.getMonth()] + TheDate.getDate() - 38
 
-            if (TheDate.getYear() % 4 == 0 && TheDate.getMonth() > 1) {
+            if (TheDate.getYear() % 4 === 0 && TheDate.getMonth() > 1) {
                 total++
             }
             for (m = 0; ; m++) {
@@ -130,8 +130,8 @@ let utils = {
             cYear = 1921 + m
             cMonth = k - n + 1
             cDay = total
-            if (k == 12) {
-                if (cMonth == Math.floor(CalendarData[m] / 0x10000) + 1) {
+            if (k === 12) {
+                if (cMonth === Math.floor(CalendarData[m] / 0x10000) + 1) {
                     cMonth = 1 - cMonth
                 }
                 if (cMonth > Math.floor(CalendarData[m] / 0x10000) + 1) {
@@ -142,13 +142,13 @@ let utils = {
 
         e2c(solarYear, solarMonth, solarDay)
 
-        let res = {}
+        const res = {}
         res.year = tgString.charAt((cYear - 4) % 10) + dzString.charAt((cYear - 4) % 12)
         res.signs = sx.charAt((cYear - 4) % 12)
-        res.month = cMonth < 1 ? '(闰)' + monString.charAt(-cMonth - 1) : monString.charAt(cMonth - 1)
+        res.month = cMonth < 1 ? `(闰){monString.charAt(-cMonth - 1)}` : monString.charAt(cMonth - 1)
 
         res.day = (cDay < 11) ? '初' : ((cDay < 20) ? '十' : ((cDay < 30) ? '廿' : '三十'))
-        if (cDay % 10 != 0 || cDay == 10) {
+        if (cDay % 10 !== 0 || cDay === 10) {
             res.day += numString.charAt((cDay - 1) % 10)
         }
         return res
@@ -169,10 +169,10 @@ let utils = {
     exifOrientation(base64) {
         function base64ToArrayBuffer(base64) {
             base64 = base64.replace(/^data:([^;]+);base64,/gmi, '')
-            let binary = atob(base64)
-            let len = binary.length
-            let buffer = new ArrayBuffer(len)
-            let view = new Uint8Array(buffer)
+            const binary = atob(base64)
+            const len = binary.length
+            const buffer = new ArrayBuffer(len)
+            const view = new Uint8Array(buffer)
             for (let i = 0; i < len; i++) {
                 view[i] = binary.charCodeAt(i)
             }
@@ -191,7 +191,7 @@ let utils = {
 
         // 步骤三，获取jpg图片的exif的角度（在ios体现最明显）
         function getOrientation(arrayBuffer) {
-            let dataView = new DataView(arrayBuffer)
+            const dataView = new DataView(arrayBuffer)
             let length = dataView.byteLength
             let orientation
             let exifIDCode
@@ -255,7 +255,7 @@ let utils = {
             }
             return orientation
         }
-        let data = base64ToArrayBuffer(base64)
+        const data = base64ToArrayBuffer(base64)
         return getOrientation(data)
     }
 }

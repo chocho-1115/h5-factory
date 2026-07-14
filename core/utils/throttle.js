@@ -2,18 +2,16 @@
 function throttle (method, delay) {
     let timer = null
     let starttime = Date.now()
-    return function () {
+    return function (...args) {
         const curTime = Date.now() // 当前时间
-        let remaining = delay - (curTime - starttime)  // 从上一次到现在，还剩下多少多余时间
-        const context = this
-        const args = arguments
+        const remaining = delay - (curTime - starttime)  // 从上一次到现在，还剩下多少多余时间
         clearTimeout(timer)
         if (remaining <= 0) {
-            method.apply(context, args)
+            method.apply(this, args)
             starttime = Date.now()
         } else {
-            timer = setTimeout(function(){
-                method.apply(context, args)
+            timer = setTimeout(() => {
+                method.apply(this, args)
             }, remaining)
         }
     }

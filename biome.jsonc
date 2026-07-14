@@ -2,6 +2,7 @@
   "files": {
     "includes": [
       "**",
+      "!**/dist",
       "!**/libs",
       "!**/public",
       "!**/.bak"

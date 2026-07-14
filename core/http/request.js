@@ -126,10 +126,10 @@ export function dispatchRequest(config){
 
             let str = ''
             for (const name in params) {
-                str += name + '=' + params[name] + '&'
+                str += `${name}=${params[name]}&`
             }
             if(str.length > 0) str = str.substring(0, str.length - 1)
-            url += url.indexOf('?')>-1 ? str : '?' + str
+            url += url.indexOf('?')>-1 ? str : `?${str}`
         }
         // 始终会调用 loadend 无论成功还是失败
         // readystatechange会触发多次，优先使用loadend

@@ -1,12 +1,12 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 // import chalk from 'chalk'
 
 const __dirname = path.resolve()
 
 const projectName = process.env.name
 let srcDir = ''
-const tarDir = path.join(__dirname, './src/'+projectName)
+const tarDir = path.join(__dirname, `./src/${projectName}`)
 const isUseReact = !!process.env.npm_config_react
 
 if(!projectName){
@@ -20,7 +20,7 @@ if(isUseReact){
 }
 
 if(fs.existsSync(tarDir)){
-    throw tarDir + ' 目录已存在'
+    throw `${tarDir}·目录已存在`
 }else{
     fs.mkdir(tarDir, {recursive: true}, (err) => {
         if (err) {

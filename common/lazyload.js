@@ -19,8 +19,7 @@ export function preload(srcArr, params) {
             if (srcArr[i].crossOrigin) newImg.crossOrigin = srcArr[i].crossOrigin
             newImg.onload = newImg.onerror = function (e) {
                 e = e || window.event
-                const self = this
-                endLoad(self, e.type, i)
+                endLoad(this, e.type, i)
             }
             setTimeout( () => {
                 newImg.src = baseURL + srcArr[i].path
@@ -30,10 +29,10 @@ export function preload(srcArr, params) {
     function endLoad(this_, eType, i) {
         num++
         const progress = num / len
-        srcArr[i]['result'] = this_
-        srcArr[i]['progress'] = progress
-        srcArr[i]['index'] = i
-        srcArr[i]['status'] = eType === 'load' ? 200 : 'Failed to load'
+        srcArr[i].result = this_
+        srcArr[i].progress = progress
+        srcArr[i].index = i
+        srcArr[i].status = eType === 'load' ? 200 : 'Failed to load'
         imgArrObj[srcArr[i].name] = this_
         params.fileload?.(srcArr[i])
         if (num === len) params.complete?.(imgArrObj)
@@ -48,7 +47,7 @@ export function lazyload(selector, params) {
         baseURL = params.baseURL || ''
 
     for (let i = 0, len = ele.length; i < len; i++) {
-        const obj = { path: '', type: '', ele: ele[i], name: '_' + i, crossOrigin: null }
+        const obj = { path: '', type: '', ele: ele[i], name: `_${i}`, crossOrigin: null }
         if (ele[i].nodeName === 'IMG') {
             obj.type = 'img'
         } else {
@@ -62,7 +61,7 @@ export function lazyload(selector, params) {
             if (obj.type === 'img') {
                 obj.ele.setAttribute('src', obj.path)
             } else if (obj.type === 'bj') {
-                obj.ele.style.backgroundImage = 'url(' + obj.path + ')'
+                obj.ele.style.backgroundImage = `url(${obj.path})`
             }
             continue
         }
@@ -76,7 +75,7 @@ export function lazyload(selector, params) {
                 if (item.type === 'img') {
                     item.ele.setAttribute('src', baseURL + item.path)
                 } else if (item.type === 'bj') {
-                    item.ele.style.backgroundImage = 'url(' + baseURL + item.path + ')'
+                    item.ele.style.backgroundImage = `url(${baseURL}${item.path})`
                 }
             }
             if (params.fileload) params.fileload(item)

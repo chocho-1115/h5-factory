@@ -172,7 +172,7 @@ const dataSrcImagesPlugin = () => {
           // 记录该 data-src 引用信息，用于后续替换
           refs.push({
             raw,            // 原始 data-src 值（如 "image/bg.jpg?as=webp"）
-            query: queryString ? '?' + queryString : '', // 保留查询参数
+            query: queryString ? `?${queryString}` : '', // 保留查询参数
             refId,          // Rollup asset 引用 ID，用于获取 hash 后路径
           })
 
