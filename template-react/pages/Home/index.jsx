@@ -7,7 +7,7 @@ export default () => {
 	console.log('Home render')
 	return (
 		<Wrap className={style.wrap}>
-				<span>{formatTime('yyyy/MM/dd h:m:s', new Date().getTime())}</span>
+				<span>{formatTime('yyyy/MM/dd h:m:s')}</span>
 		</Wrap>
 	)
 }

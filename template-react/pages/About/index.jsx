@@ -22,8 +22,8 @@ export default ({ setGlobalNum }) => {
     return (
         <Wrap>
             <div className="about">
-            useState: {num} <button onClick={handleClick}>add</button><br/>
-            useContext: {numClick_data} <button onClick={handleClick2}>add</button><br/>
+            useState: {num} <button type="button" onClick={handleClick}>add</button><br/>
+            useContext: {numClick_data} <button type="button" onClick={handleClick2}>add</button><br/>
             </div>
         </Wrap>
     )

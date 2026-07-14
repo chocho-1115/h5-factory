@@ -27,18 +27,18 @@ export default function App() {
     }
         
     return (
-        <>
-            <BrowserRouter>
-                <Header />
-                <div className='content' onClick={handleClick}>
-                    <numClick.Provider value={globalNum}>
-                        <Routes>
-                            <Route index element={<Index />} />
-                            <Route path="/about" element={<About setGlobalNum={setGlobalNum} />} />
-                        </Routes>
-                    </numClick.Provider>
-                </div>
-            </BrowserRouter>
-        </>
+        <BrowserRouter>
+            <Header />
+            {/* biome-ignore lint/a11y/noStaticElementInteractions: 测试 demo */}
+            {/* biome-ignore lint/a11y/useKeyWithClickEvents: 测试 demo */}
+            <div className='content' onClick={handleClick}>
+                <numClick.Provider value={globalNum}>
+                    <Routes>
+                        <Route index element={<Index />} />
+                        <Route path="/about" element={<About setGlobalNum={setGlobalNum} />} />
+                    </Routes>
+                </numClick.Provider>
+            </div>
+        </BrowserRouter>
     )
 }

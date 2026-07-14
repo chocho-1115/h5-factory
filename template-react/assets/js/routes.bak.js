@@ -15,16 +15,17 @@ const context = import.meta.webpackContext('../pages', {
     // exclude: /three/, // 排除
 })
 
-let list = context.keys().map((path, meta) => {
+const list = context.keys().map((path, meta) => {
     console.log(path, meta)
 
-    let dir = path.replace(/^\./, '../pages')
+    const dir = path.replace(/^\./, '../pages')
     
 
     let fileName = path.match(/([^/]+)$/)[0].replace(/(\.js)$/, '')
     fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1)
 
     return {
+        id: fileName,
         name: fileName,
         path: path.substr(1).replace(/(index\.js|\.js)$/, ''),
         // component: () => import(path),
@@ -45,9 +46,9 @@ console.log(context) // 直接访问模块导出内容
 
 export default function () {
     
-    const RouteList = list.map((item, index) => {
+    const RouteList = list.map((item, _index) => {
         const Component = lazy(item.component)
-        return <Route key={index} index path={item.path} element={<Component />} />
+        return <Route key={item.id} index path={item.path} element={<Component />} />
     })
     
     return (
