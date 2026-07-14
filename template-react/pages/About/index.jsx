@@ -1,30 +1,37 @@
-import { useState } from 'react'
-import { numClick } from '@/assets/js/context'
-import { useContext } from 'react'
+import { useState } from "react"
+import { numClick } from "@/assets/js/context"
+import { useContext } from "react"
 
-import Wrap from '@/components/Wrap'
+import Wrap from "@/components/Wrap"
 
 export default ({ setGlobalNum }) => {
+	console.log("About render")
 
-    console.log('About render')
+	const numClick_data = useContext(numClick)
+	const [num, setNum] = useState(0)
 
-    const numClick_data = useContext(numClick)
-    const [num, setNum] = useState(0)
+	function handleClick() {
+		setNum(num + 1)
+	}
 
-    function handleClick() {
-        setNum(num + 1)
-    }
+	function handleClick2() {
+		setGlobalNum(numClick_data + 1)
+	}
 
-    function handleClick2() {
-        setGlobalNum(numClick_data+1)
-    }
-
-    return (
-        <Wrap>
-            <div className="about">
-            useState: {num} <button type="button" onClick={handleClick}>add</button><br/>
-            useContext: {numClick_data} <button type="button" onClick={handleClick2}>add</button><br/>
-            </div>
-        </Wrap>
-    )
+	return (
+		<Wrap>
+			<div className="about">
+				useState: {num}{" "}
+				<button type="button" onClick={handleClick}>
+					add
+				</button>
+				<br />
+				useContext: {numClick_data}{" "}
+				<button type="button" onClick={handleClick2}>
+					add
+				</button>
+				<br />
+			</div>
+		</Wrap>
+	)
 }

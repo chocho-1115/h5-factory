@@ -1,39 +1,36 @@
-import { lazy } from 'react'
-import { NavLink, Link, BrowserRouter, Routes, Route } from 'react-router'
+import { lazy } from "react"
+import { NavLink, Link, BrowserRouter, Routes, Route } from "react-router"
 // import Index from '../pages/index'
 // const About = lazy(() => import('../pages/About')) // 动态导入
 
-
-
 console.log(import.meta) // 直接访问模块导出内容
 
-const context = import.meta.webpackContext('../pages', {
-    recursive: true, // 递归
+const context = import.meta.webpackContext("../pages", {
+	recursive: true, // 递归
 
-    regExp: /\.js$/, // 匹配
-    mode: 'eager', // mode?: 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once';
-    // exclude: /three/, // 排除
+	regExp: /\.js$/, // 匹配
+	mode: "eager", // mode?: 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once';
+	// exclude: /three/, // 排除
 })
 
 const list = context.keys().map((path, meta) => {
-    console.log(path, meta)
+	console.log(path, meta)
 
-    const dir = path.replace(/^\./, '../pages')
-    
+	const dir = path.replace(/^\./, "../pages")
 
-    let fileName = path.match(/([^/]+)$/)[0].replace(/(\.js)$/, '')
-    fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1)
+	let fileName = path.match(/([^/]+)$/)[0].replace(/(\.js)$/, "")
+	fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1)
 
-    return {
-        id: fileName,
-        name: fileName,
-        path: path.substr(1).replace(/(index\.js|\.js)$/, ''),
-        // component: () => import(path),
-        component: () => import(dir) // .concat(updatedContent),
-        // meta
-    }
-    // const pathWithoutLeadingDot = filePath.replace('.', '') // remove first dot of ./path-name
-    // return require(`@/pages${pathWithoutLeadingDot}`).default
+	return {
+		id: fileName,
+		name: fileName,
+		path: path.substr(1).replace(/(index\.js|\.js)$/, ""),
+		// component: () => import(path),
+		component: () => import(dir), // .concat(updatedContent),
+		// meta
+	}
+	// const pathWithoutLeadingDot = filePath.replace('.', '') // remove first dot of ./path-name
+	// return require(`@/pages${pathWithoutLeadingDot}`).default
 })
 // .then((res)=>{
 //     console.log(res)
@@ -42,39 +39,32 @@ const list = context.keys().map((path, meta) => {
 console.log(list) // 直接访问模块导出内容
 console.log(context) // 直接访问模块导出内容
 
-
-
 export default function () {
-    
-    const RouteList = list.map((item, _index) => {
-        const Component = lazy(item.component)
-        return <Route key={item.id} index path={item.path} element={<Component />} />
-    })
-    
-    return (
-        <BrowserRouter>
-            <header>
-                <nav>
-                    <NavLink to="/">Index</NavLink>
-                    <NavLink to="/about">About</NavLink>
-                    <Link to="/about">About</Link>
-                </nav>
-            </header>
-            <Routes>
-                {RouteList}
-                
-            </Routes>
-            {/* <Routes>
+	const RouteList = list.map((item, _index) => {
+		const Component = lazy(item.component)
+		return (
+			<Route key={item.id} index path={item.path} element={<Component />} />
+		)
+	})
+
+	return (
+		<BrowserRouter>
+			<header>
+				<nav>
+					<NavLink to="/">Index</NavLink>
+					<NavLink to="/about">About</NavLink>
+					<Link to="/about">About</Link>
+				</nav>
+			</header>
+			<Routes>{RouteList}</Routes>
+			{/* <Routes>
                 <Route index element={<Index />} />
                 <Route path="/about" element={<About />} />
                     
             </Routes> */}
-        </BrowserRouter>
-    )
+		</BrowserRouter>
+	)
 }
-
-
-
 
 // export function generateRoutes() {
 //     const pagesDirectory = path.resolve(__dirname, './src/pages')
@@ -115,4 +105,3 @@ export default function () {
 //         routesContent
 //     )
 // }
-
