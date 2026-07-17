@@ -195,7 +195,7 @@ const dataSrcImagesPlugin = () => {
 
 				// 从 bundle 中取出对应的 HTML chunk
 				const chunk = bundle[htmlRelPath]
-				if (!chunk || chunk.type !== "asset") continue
+				if (chunk?.type !== "asset") continue
 				// chunk.type !== 'asset' 的情况理论上不会出现，
 				// 因为 HTML 是作为 asset 处理的，但做防御性检查
 
