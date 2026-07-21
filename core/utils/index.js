@@ -16,6 +16,7 @@ import isMiniProgram from "./isMiniProgram"
 import isMobile from "./isMobile"
 import isPreviousPage from "./isPreviousPage"
 import isWechat from "./isWechat"
+import joinPath from "./joinPath"
 import jsonp from "./jsonp"
 import matchUserAgent from "./matchUserAgent"
 import queryString from "./queryString"
@@ -40,6 +41,7 @@ export {
 	isMobile,
 	isPreviousPage,
 	isWechat,
+	joinPath,
 	jsonp,
 	matchUserAgent,
 	queryString,
