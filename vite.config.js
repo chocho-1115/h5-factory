@@ -11,13 +11,13 @@ import dataSrcPlugin from "./.node/vite-plugin-data-src.js"
 export default defineConfig(({ _command, _mode }) => {
 	const config = {
 		root: projectConfig.src,
-		// publicDir: path.join(__dirname, '/public'),
+		// publicDir: path.join(import.meta.dirname, '/public'),
 		resolve: {
 			alias: {
 				// '@': fileURLToPath(new URL('./src', import.meta.url))
 
-				"~": path.join(__dirname, "/"),
-				"@": path.join(__dirname, projectConfig.src),
+				"~": path.join(import.meta.dirname, "/"),
+				"@": path.join(import.meta.dirname, projectConfig.src),
 			},
 		},
 		server: {
@@ -26,7 +26,7 @@ export default defineConfig(({ _command, _mode }) => {
 		build: {
 			emptyOutDir: true, // 每次打包都会清空项目目录
 			assetsInlineLimit: 0, // 默认 4096,
-			outDir: path.join(__dirname, projectConfig.dist),
+			outDir: path.join(import.meta.dirname, projectConfig.dist),
 		},
 		plugins: [
 			dataSrcPlugin(),
