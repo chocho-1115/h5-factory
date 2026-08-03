@@ -23,8 +23,6 @@ export default function App() {
 	return (
 		<BrowserRouter>
 			<Header />
-			{/* biome-ignore lint/a11y/noStaticElementInteractions: 测试 demo */}
-			{/* biome-ignore lint/a11y/useKeyWithClickEvents: 测试 demo */}
 			<div className="content">
 				<numClick.Provider value={globalNum}>
 					<Routes>

@@ -1,9 +1,7 @@
 import { useContext, useState } from "react"
 import { numClick } from "@/assets/js/context"
-
-import { useClickStore } from '@/store'
-
 import Wrap from "@/components/Wrap"
+import { useClickStore } from "@/store"
 
 export default ({ setGlobalNum }) => {
 	console.log("About render")
@@ -11,8 +9,8 @@ export default ({ setGlobalNum }) => {
 	const numClick_data = useContext(numClick)
 	const [num, setNum] = useState(0)
 
-	const click = useClickStore((state) => state.click);
-  const add = useClickStore((state) => state.add);
+	const click = useClickStore((state) => state.click)
+	const add = useClickStore((state) => state.add)
 
 	function handleClick() {
 		setNum(num + 1)
@@ -31,17 +29,20 @@ export default ({ setGlobalNum }) => {
 				useState: {num}{" "}
 				<button type="button" onClick={handleClick}>
 					add
-				</button>（组件变量）
+				</button>
+				（组件变量）
 				<br />
 				useContext: {numClick_data}{" "}
 				<button type="button" onClick={handleClick2}>
 					add
-				</button>（父组件变量）
+				</button>
+				（父组件变量）
 				<br />
 				useStore: {click}{" "}
 				<button type="button" onClick={add}>
 					add
-				</button>（store变量）
+				</button>
+				（store变量）
 				<br />
 			</div>
 		</Wrap>
