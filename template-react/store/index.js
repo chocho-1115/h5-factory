@@ -1,2 +1,2 @@
 export { useUserStore } from './userStore'
-export { useClickStore } from './useClickStore'
+export { useClickStore } from './clickStore'

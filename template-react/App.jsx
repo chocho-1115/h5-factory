@@ -20,20 +20,12 @@ remInit({
 export default function App() {
 	const [globalNum, setGlobalNum] = useState(0)
 
-	const [num, setNum] = useState(0)
-	function handleClick() {
-		console.log(
-			"会触发所有子组件的render，这是与vue在数据响应上的重要区别，react的性能优化也是围绕这一特性进行的。",
-		)
-		setNum(num + 1)
-	}
-
 	return (
 		<BrowserRouter>
 			<Header />
 			{/* biome-ignore lint/a11y/noStaticElementInteractions: 测试 demo */}
 			{/* biome-ignore lint/a11y/useKeyWithClickEvents: 测试 demo */}
-			<div className="content" onClick={handleClick}>
+			<div className="content">
 				<numClick.Provider value={globalNum}>
 					<Routes>
 						<Route index element={<Index />} />
