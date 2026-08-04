@@ -1,9 +1,9 @@
 import "./assets/css/main.scss"
-import { useState } from "react"
+
 import { BrowserRouter, Route, Routes } from "react-router"
 import { remInit } from "~/common/rem.js"
 import { browserDetect } from "~/core/utils"
-import { numClick } from "./assets/js/context"
+
 import Header from "./containers/Header"
 import About from "./pages/About"
 import Index from "./pages/Home"
@@ -18,21 +18,18 @@ remInit({
 })
 
 export default function App() {
-	const [globalNum, setGlobalNum] = useState(0)
-
+	console.log("App render")
 	return (
 		<BrowserRouter>
 			<Header />
 			<div className="content">
-				<numClick.Provider value={globalNum}>
-					<Routes>
-						<Route index element={<Index />} />
-						<Route
-							path="/about"
-							element={<About setGlobalNum={setGlobalNum} />}
-						/>
-					</Routes>
-				</numClick.Provider>
+				<Routes>
+					<Route index element={<Index />} />
+					<Route
+						path="/about"
+						element={<About />}
+					/>
+				</Routes>
 			</div>
 		</BrowserRouter>
 	)

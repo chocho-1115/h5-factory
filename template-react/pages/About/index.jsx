@@ -1,49 +1,38 @@
-import { useContext, useState } from "react"
-import { numClick } from "@/assets/js/context"
+import { useState } from "react"
+import { AboutContext } from "./context"
 import Wrap from "@/components/Wrap"
+import Child from "./child"
+
 import { useClickStore } from "@/store"
 
-export default ({ setGlobalNum }) => {
+export default () => {
 	console.log("About render")
 
-	const numClick_data = useContext(numClick)
-	const [num, setNum] = useState(0)
+	// useState
+	const [parentNum, setParentNum] = useState(0)
+	
+	// useContext
+	const [numContext, setNumContext] = useState(0)
 
 	const click = useClickStore((state) => state.click)
-	const add = useClickStore((state) => state.add)
-
-	function handleClick() {
-		setNum(num + 1)
-	}
-
-	function handleClick2() {
-		console.log(
-			"会触发所有子组件的render，这是与vue在数据响应上的重要区别，react的性能优化也是围绕这一特性进行的。",
-		)
-		setGlobalNum(numClick_data + 1)
-	}
 
 	return (
 		<Wrap>
 			<div className="about">
-				useState: {num}{" "}
-				<button type="button" onClick={handleClick}>
-					add
-				</button>
-				（组件变量）
-				<br />
-				useContext: {numClick_data}{" "}
-				<button type="button" onClick={handleClick2}>
-					add
-				</button>
-				（父组件变量）
-				<br />
-				useStore: {click}{" "}
-				<button type="button" onClick={add}>
-					add
-				</button>
-				（store变量）
-				<br />
+				<AboutContext.Provider value={{numContext, setNumContext}}>
+					<div>
+						父组件的 useState {parentNum}
+					</div>
+					<div>
+						父组件的 useTontext {numContext}
+					</div>
+					<div>
+						父组件的 useStore {click}
+					</div>
+					<Child parentNum={parentNum} setParentNum={setParentNum} />
+
+				</AboutContext.Provider>
+
 			</div>
 		</Wrap>
 	)
