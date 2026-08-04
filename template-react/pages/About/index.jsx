@@ -1,16 +1,15 @@
 import { useState } from "react"
-import { AboutContext } from "./context"
 import Wrap from "@/components/Wrap"
-import Child from "./child"
-
 import { useClickStore } from "@/store"
+import Child from "./child"
+import { AboutContext } from "./context"
 
 export default () => {
 	console.log("About render")
 
 	// useState
 	const [parentNum, setParentNum] = useState(0)
-	
+
 	// useContext
 	const [numContext, setNumContext] = useState(0)
 
@@ -19,20 +18,12 @@ export default () => {
 	return (
 		<Wrap>
 			<div className="about">
-				<AboutContext.Provider value={{numContext, setNumContext}}>
-					<div>
-						父组件的 useState {parentNum}
-					</div>
-					<div>
-						父组件的 useTontext {numContext}
-					</div>
-					<div>
-						父组件的 useStore {click}
-					</div>
+				<AboutContext.Provider value={{ numContext, setNumContext }}>
+					<div>父组件的 useState {parentNum}</div>
+					<div>父组件的 useTontext {numContext}</div>
+					<div>父组件的 useStore {click}</div>
 					<Child parentNum={parentNum} setParentNum={setParentNum} />
-
 				</AboutContext.Provider>
-
 			</div>
 		</Wrap>
 	)

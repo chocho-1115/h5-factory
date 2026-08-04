@@ -25,10 +25,7 @@ export default function App() {
 			<div className="content">
 				<Routes>
 					<Route index element={<Index />} />
-					<Route
-						path="/about"
-						element={<About />}
-					/>
+					<Route path="/about" element={<About />} />
 				</Routes>
 			</div>
 		</BrowserRouter>
