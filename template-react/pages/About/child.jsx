@@ -21,6 +21,7 @@ export default ({ parentNum, setParentNum }) => {
 	// useStore
 	const click = useClickStore((state) => state.click)
 	const add = useClickStore((state) => state.add)
+	const clear = useClickStore((state) => state.clear)
 
 	return (
 		<Wrap>
@@ -40,6 +41,9 @@ export default ({ parentNum, setParentNum }) => {
 				子组件的 useStore: {click}{" "}
 				<button type="button" onClick={add}>
 					add
+				</button>
+				<button type="button" onClick={clear}>
+					clear
 				</button>
 				（store变量）
 				<br />
