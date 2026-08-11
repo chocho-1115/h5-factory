@@ -1,15 +1,13 @@
 # h5-factory
 
-This project is designed for the development of marketing-oriented H5 pages, which typically exhibit the following characteristics:
+A single build toolchain to manage all your small web projects.
 
-- Short development cycles
-- Large number of projects
-- Small individual project scope
+Small web projects usually end up duplicating the same build setup over and over — each one maintaining its own config, dependencies and scripts. This project solves that by providing one shared build toolchain: all your small projects live under it, so you manage them all in one place instead of maintaining a toolchain per project.
 
-From a development perspective, this demands rapid response and efficient delivery. As a result, this project was created to address the following key challenges:
+Key features:
 
-- Supports managing multiple projects under a single build system, eliminating the need to maintain multiple build configurations.
-- Enables one-click generation of base templates, offering both native and React template options to accommodate different project requirements. The templates come pre-packaged with commonly used foundational features, allowing for secondary development on top of the templates, thereby improving development efficiency.
+- Manage multiple projects under a single build system, eliminating the need to maintain multiple build configurations.
+- One-click scaffolding with both native and React templates, pre-packaged with commonly used foundational features, ready for secondary development.
 
 
 ## Basic Usage
