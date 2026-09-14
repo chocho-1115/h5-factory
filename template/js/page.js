@@ -1,5 +1,3 @@
-import { TweenMax } from "gsap"
-
 const page = document.querySelectorAll(".page")
 let index = -1
 let status = -1 // 页面切换状态

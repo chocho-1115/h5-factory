@@ -1,5 +1,3 @@
-import { gsap } from "gsap"
-
 import "./assets/css/main.scss"
 import { lazyload } from "~/common/lazyload.js"
 import { remInit } from "~/common/rem.js"
