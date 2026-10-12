@@ -13,16 +13,16 @@
 		"check": "node .node/biome.js --biome-check"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.7",
-		"sass": "^1.102.0",
-		"sharp": "^0.35.3",
-		"vite": "^8.2.0",
+		"@biomejs/biome": "2.5.15",
+		"sass": "^1.105.1",
+		"sharp": "^0.35.5",
+		"vite": "^8.3.4",
 		"vite-plugin-image-optimizer": "^2.0.3"
 	},
 	"dependencies": {
-		"react": "^19.2.8",
-		"react-dom": "^19.2.8",
-		"react-router": "^8.3.0",
-		"zustand": "^5.0.14"
+		"react": "^19.3.0",
+		"react-dom": "^19.3.0",
+		"react-router": "^8.4.0",
+		"zustand": "^5.0.15"
 	}
 }
