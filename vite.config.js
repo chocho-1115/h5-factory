@@ -20,9 +20,6 @@ export default defineConfig(({ _command, _mode }) => {
 				"@": path.join(import.meta.dirname, projectConfig.src),
 			},
 		},
-		server: {
-			open: false,
-		},
 		build: {
 			emptyOutDir: true, // 每次打包都会清空项目目录
 			assetsInlineLimit: 0, // 默认 4096,
@@ -39,6 +36,23 @@ export default defineConfig(({ _command, _mode }) => {
 				webp: { lossless: true, quality: 80 },
 			}),
 		],
+		server: {
+			allowedHosts: ["XXX.com"],
+			host: "0.0.0.0",
+			port: 80,
+			open: false,
+			proxy: {
+				"/dev-api": {
+					target: `http://www.XXX.com`,
+					changeOrigin: true,
+					headers: { Origin: "https://www.XXX.com" },
+					rewrite: (path) => {
+						const reg = new RegExp("^" + "/dev-api")
+						return path.replace(reg, "/api")
+					},
+				},
+			},
+		},
 	}
 	return config
 })
