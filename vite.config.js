@@ -37,18 +37,26 @@ export default defineConfig(({ _command, _mode }) => {
 			}),
 		],
 		server: {
-			allowedHosts: ["XXX.com"],
+			allowedHosts: ["indent.top"],
 			host: "0.0.0.0",
 			port: 80,
 			open: false,
 			proxy: {
 				"/dev-api": {
-					target: `http://www.XXX.com`,
+					target: `http://www.indent.top`,
 					changeOrigin: true,
-					headers: { Origin: "https://www.XXX.com" },
+					headers: { Origin: "https://www.indent.top" },
 					rewrite: (path) => {
 						const reg = new RegExp("^" + "/dev-api")
 						return path.replace(reg, "/api")
+					},
+				},
+				"/lacal-api": {
+					target: `http://127.0.0.1:10000`,
+					changeOrigin: true,
+					rewrite: (path) => {
+						const reg = new RegExp("^" + "/lacal-api")
+						return path.replace(reg, "")
 					},
 				},
 			},
