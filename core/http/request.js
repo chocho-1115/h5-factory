@@ -15,8 +15,7 @@
 
 const ERROR_INFO = {
 	// 请求事件错误
-	"REQUEST-EVENT-TIMEOUT":
-		"Request Timeout: The request exceeded the timeout limit",
+	"REQUEST-EVENT-TIMEOUT": "Request Timeout: The request exceeded the timeout limit",
 	"REQUEST-EVENT-ERROR": "Network Error: Failed to establish a connection",
 	"REQUEST-EVENT-ABORT": "Request Aborted: The request was manually cancelled",
 	// 请求前的代码验证错误/或程序错误
