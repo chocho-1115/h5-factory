@@ -31,7 +31,10 @@ export const defaultsConfig = {
 	async: true,
 	method: "get",
 	timeout: 5000,
-	responseType: "json",
+	// 不设 responseType，对齐 axios 默认行为：
+	// 不设时浏览器处于文本模式，body 能完整读到 responseText，JSON 解析交给我们自己做。
+	// 不能用 'json'：浏览器遇非 JSON（如后端 http.Error 返回的纯文本）会把 response 置为 null，错误信息就丢了
+	// responseType: "json",
 	headers: {
 		"content-type": "application/x-www-form-urlencoded", // 简单请求 application/x-www-form-urlencoded、multipart/form-data 或 text/plain
 		// "content-type": "application/json",
@@ -74,14 +77,39 @@ export function dispatchRequest(config) {
 			if (this.readyState !== 4) return
 			if (isSettled) return
 			isSettled = true
+
+			// 对齐 axios 的 XHR 适配器：
+			// 未设(none)/text/json 用 responseText 读文本；blob/arraybuffer 等才读 response
+			const responseType = config.responseType
+			let data =
+				!responseType || responseType === "text" || responseType === "json"
+					? client.responseText
+					: client.response
+
+			// 对齐 axios 的 transformResponse：
+			// 仅当“未设 responseType”或“声明为 json”时才尝试解析；失败保留原字符串
+			// 这样正常 JSON 得到对象，后端返回的纯文本也能原样保留在 data 里
+			if (
+				data &&
+				typeof data === "string" &&
+				(!responseType || responseType === "json")
+			) {
+				try {
+					data = JSON.parse(data)
+				} catch (e) {
+					// body 不是 JSON（如 "id不能为空."），保留纯文本
+				}
+			}
+
 			const response = {
-				data: client.response,
+				data,
 				status: client.status,
 				statusText: client.statusText,
 				config,
 				request: client,
 				// headers,
 			}
+
 			if (client.status >= 200 && client.status < 300) {
 				resolve(response)
 			} else {
@@ -156,7 +184,12 @@ export function dispatchRequest(config) {
 				url.substring(0, 4) === "http" ? url : config.baseURL + url,
 				config.async,
 			)
-			client.responseType = config.responseType
+			// 对齐 axios：只有非空且不是 'json' 时才真正设给 xhr
+			// 'json' 交给自己解析，避免解析失败时 response 变 null；
+			// 另外设了非文本类型后访问 responseText 会抛 InvalidStateError，所以 'json' 不能设
+			if (config.responseType && config.responseType !== "json") {
+				client.responseType = config.responseType
+			}
 
 			for (const name in headers) {
 				client.setRequestHeader(name, headers[name])
