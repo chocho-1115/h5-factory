@@ -74,7 +74,7 @@ export function dispatchRequest(config) {
 		}
 		// 请求发生之后
 		const onLoadendHandler = () => {
-			if (this.readyState !== 4) return
+			if (client.readyState !== 4) return
 			if (isSettled) return
 			isSettled = true
 
