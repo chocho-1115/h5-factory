@@ -10,6 +10,8 @@
 
 ### 更新记录
 
+* (2026-10-15): 优化http模块，抽离出HttpError对象；
+* (2026-10-14): 优化http模块，不设置responseType默认值，即使设置为json，也不显式的设置client.responseType；
 * (2026-05-23): 代码规范类工作由biome工具接替；
 * (2026-05-12): vite支持打包react；
 * (2026-05-6): 新增vite分支，将vite接替构建工作；
