@@ -40,7 +40,7 @@ export function dispatchRequest(config) {
 
 	const promise = new Promise((resolve, reject) => {
 		let isSettled = false
-		
+
 		const onLoadendHandler = () => {
 			if (client.readyState !== 4) return
 			if (isSettled) return
@@ -64,7 +64,7 @@ export function dispatchRequest(config) {
 			) {
 				try {
 					data = JSON.parse(data)
-				} catch (e) {
+				} catch (_e) {
 					// body 不是 JSON（如 "id不能为空."），保留纯文本
 				}
 			}

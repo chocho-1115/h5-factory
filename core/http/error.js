@@ -15,16 +15,15 @@
 
 // 只管理「非网络返回错误」：传输层错误 + 请求前的程序/配置错误
 const ERROR_INFO = {
-  // 请求事件错误
+	// 请求事件错误
 	ECONNABORTED: "Request Timeout: The request exceeded the timeout limit",
 	ERR_NETWORK: "Network Error: Failed to establish a connection",
 	ERR_CANCELED: "Request Aborted: The request was manually cancelled",
-  // 请求前的代码验证错误/或程序错误
+	// 请求前的代码验证错误/或程序错误
 	ERR_INVALID_URL: "Invalid URL: Expected a non-empty string",
 }
 
 export const ERROR_CODE = Object.freeze({
-  
 	ECONNABORTED: "ECONNABORTED",
 	ERR_NETWORK: "ERR_NETWORK",
 	ERR_CANCELED: "ERR_CANCELED",
@@ -42,31 +41,28 @@ const EVENT_ERROR_CODE = {
 	abort: ERROR_CODE.ERR_CANCELED,
 }
 
-
 export class HttpError extends Error {
+	// 对齐 axios：有才挂 错误拦截时 可如下注释代码来判断请求状况
+	// if (error.response) {
+	//     // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
+	// } else if (error.request) {
+	//     // 请求已经成功发起，但没有收到响应
+	// } else {
+	//     // 发送请求前出了点问题
+	// }
 
-  // 对齐 axios：有才挂 错误拦截时 可如下注释代码来判断请求状况
-  // if (error.response) {
-  //     // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-  // } else if (error.request) {
-  //     // 请求已经成功发起，但没有收到响应
-  // } else {
-  //     // 发送请求前出了点问题
-  // }
-  
 	constructor(message, code, config, request, response) {
-
 		super(message)
-		
-    // 普通类的实例没有 name
-    // 但 Error 这个内置类特例：它在原型上定义了 name（默认 "Error"，不可枚举），所以：
-    // new Error("x").name  // "Error"（继承自 Error.prototype）
-    // HttpError extends Error 就继承了这个 name。你在构造函数里写 this.name = "HttpError"，是做覆盖，让实例显示成 HttpError。
-		this.name = "HttpError" 
 
-    this.code = code
+		// 普通类的实例没有 name
+		// 但 Error 这个内置类特例：它在原型上定义了 name（默认 "Error"，不可枚举），所以：
+		// new Error("x").name  // "Error"（继承自 Error.prototype）
+		// HttpError extends Error 就继承了这个 name。你在构造函数里写 this.name = "HttpError"，是做覆盖，让实例显示成 HttpError。
+		this.name = "HttpError"
+
+		this.code = code
 		this.config = config
-    // this.isHttpError = true // 预留
+		// this.isHttpError = true // 预留
 		if (request) this.request = request
 		if (response) {
 			this.response = response
@@ -76,7 +72,7 @@ export class HttpError extends Error {
 
 	// 场景一：请求发出前的错误（空 url / 配置 / setRequestHeader 等同步抛错）
 	// 结果：只有 config，无 request、无 response
-  static beforeRequest(error, config) {
+	static beforeRequest(error, config) {
 		const code = ERROR_INFO[error.message] ? error.message : error.name
 		const message = ERROR_INFO[code] || error.message
 		return new HttpError(message, code, config)
