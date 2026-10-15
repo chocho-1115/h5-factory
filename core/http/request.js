@@ -78,6 +78,9 @@ export function dispatchRequest(config) {
 				// headers,
 			}
 
+			// 已知边界：load 时 status 为 0 表示“非 HTTP 成功”（如 file://、data:），axios 会判成功，此处判为失败。
+			// 本 http 只用于 http(s)，本地文件请改用 fetch；
+			// status 为 0 的网络类失败已由 error/timeout/abort 事件覆盖。
 			if (client.status >= 200 && client.status < 300) {
 				resolve(response)
 			} else {
