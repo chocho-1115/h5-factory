@@ -1,26 +1,4 @@
-// AxiosError.ERR_BAD_OPTION_VALUE = 'ERR_BAD_OPTION_VALUE';
-// AxiosError.ERR_BAD_OPTION = 'ERR_BAD_OPTION';
-// AxiosError.ECONNABORTED = 'ECONNABORTED';
-// AxiosError.ETIMEDOUT = 'ETIMEDOUT';
-// AxiosError.ECONNREFUSED = 'ECONNREFUSED';
-// AxiosError.ERR_NETWORK = 'ERR_NETWORK';
-// AxiosError.ERR_FR_TOO_MANY_REDIRECTS = 'ERR_FR_TOO_MANY_REDIRECTS';
-// AxiosError.ERR_DEPRECATED = 'ERR_DEPRECATED';
-// AxiosError.ERR_BAD_RESPONSE = 'ERR_BAD_RESPONSE';
-// AxiosError.ERR_BAD_REQUEST = 'ERR_BAD_REQUEST';
-// AxiosError.ERR_CANCELED = 'ERR_CANCELED';
-// AxiosError.ERR_NOT_SUPPORT = 'ERR_NOT_SUPPORT';
-// AxiosError.ERR_INVALID_URL = 'ERR_INVALID_URL';
-// AxiosError.ERR_FORM_DATA_DEPTH_EXCEEDED = 'ERR_FORM_DATA_DEPTH_EXCEEDED';
-
-const ERROR_INFO = {
-	// 请求事件错误
-	"REQUEST-EVENT-TIMEOUT": "Request Timeout: The request exceeded the timeout limit",
-	"REQUEST-EVENT-ERROR": "Network Error: Failed to establish a connection",
-	"REQUEST-EVENT-ABORT": "Request Aborted: The request was manually cancelled",
-	// 请求前的代码验证错误/或程序错误
-	"INVALID-URL": "Invalid URL: Expected a non-empty string",
-}
+import { ERROR_CODE, HttpError } from "./error.js"
 
 // 默认配置
 export const defaultsConfig = {
@@ -62,16 +40,7 @@ export function dispatchRequest(config) {
 
 	const promise = new Promise((resolve, reject) => {
 		let isSettled = false
-		// 请求发送之前出错了
-		const sendBeforeError = (code, message = "") => {
-			reject({
-				code,
-				message: ERROR_INFO[code] || message,
-				status: client.status,
-				config,
-			})
-		}
-		// 请求发生之后
+		
 		const onLoadendHandler = () => {
 			if (client.readyState !== 4) return
 			if (isSettled) return
@@ -112,30 +81,14 @@ export function dispatchRequest(config) {
 			if (client.status >= 200 && client.status < 300) {
 				resolve(response)
 			} else {
-				const res = {
-					code: client.status,
-					message: client.statusText,
-					status: client.status,
-					config,
-					request: client,
-				}
-				if (client.response) res.response = response
-				reject(res)
+				reject(HttpError.fromResponse(client.status, config, client, response))
 			}
 		}
 		// 请求发生之后 错误事件发生时
 		const onErrorHandler = (e) => {
 			if (isSettled) return
 			isSettled = true
-			const code = `REQUEST-EVENT-${e.type.toUpperCase()}`
-			const res = {
-				code,
-				message: ERROR_INFO[code],
-				status: client.status,
-				config,
-				request: client,
-			}
-			reject(res)
+			reject(HttpError.fromRequestEvent(e.type, config, client))
 		}
 
 		const client = new XMLHttpRequest()
@@ -175,7 +128,7 @@ export function dispatchRequest(config) {
 
 		try {
 			if (!url) {
-				throw new Error("INVALID-URL") // 后面的代码不执行
+				throw new Error(ERROR_CODE.ERR_INVALID_URL) // 后面的代码不执行
 			}
 			client.timeout = Math.max(2000, config.timeout)
 			client.open(
@@ -196,11 +149,7 @@ export function dispatchRequest(config) {
 
 			client.send(config.data ? JSON.stringify(config.data) : null)
 		} catch (err) {
-			if (ERROR_INFO[err.message]) {
-				sendBeforeError(err.message)
-			} else {
-				sendBeforeError(err.name, err.message)
-			}
+			reject(HttpError.beforeRequest(err, config))
 		}
 	})
 	return promise
