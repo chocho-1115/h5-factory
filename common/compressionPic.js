@@ -2,9 +2,9 @@
 // quality 可选
 // 在指定图片格式为 image/jpeg 或 image/webp的情况下，可以从 0 到 1 的区间内选择图片的质量。如果超出取值范围，将会使用默认值 0.92。其他参数会被忽略。
 
-import { getRandomStr } from "../common/utils.js"
+import { getRandomStr } from "~/core/utils"
 
-export function compressionPIC(src, opt, callback) {
+export function compressionPic(src, opt, callback) {
 	let maxSize = Math.max(opt.maxSize, 0) || 0
 	const exif_orientation = opt.exif_orientation || 0
 	const type = opt.type || "image/png"
