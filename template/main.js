@@ -25,6 +25,7 @@ const config = {
 		desc: "分享副标题",
 		imgUrl: "https://www.seth5.com/2024/**/static/image/share.jpg", // document.location.hostname 不带端口
 		link: "https://www.*.com/*/**/",
+		debug: false,
 	},
 	media: {
 		bj: null,

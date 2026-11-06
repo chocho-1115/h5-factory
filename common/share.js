@@ -11,12 +11,15 @@ const config = {
 
 export default {
 	// 微信初始化分享
-	init(options) {
-		Object.assign(config, options)
-
+	init(options = {}) {
+		Object.keys(config).forEach(key => {
+			if (Object.hasOwn(options, key)) {
+				config[key] = options[key]
+			}
+		})
 		if (!utils.isWechat(true)) return
 		window.jssdk
-			?.init({ debug: false })
+			?.init({ debug: options.debug, appId: options.appId })
 			.then(() => {})
 			.catch(() => {})
 	},
