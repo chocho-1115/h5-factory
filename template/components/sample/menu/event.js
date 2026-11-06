@@ -10,8 +10,8 @@ const clickCall = {
 	createFileControl(e) {
 		const accept = e.target.getAttribute("data-accept")
 		const fileEle = utils.createFileControl(accept, {
-			successCallback(_reader) {},
-			errorCallback(_res) {},
+			changeHandler(_reader) {},
+			errorHandler(_res) {},
 		})
 		fileEle.click()
 	},
