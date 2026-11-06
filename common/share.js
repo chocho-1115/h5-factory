@@ -43,7 +43,12 @@ export default {
 		// 设置默认分享文案
 		if (utils.isWechat()) {
 			wx.ready(() => {
-				window.jssdk?.share(fxData)
+				// 微信下 success 和 callback都是设置分享成功
+				// callback 先执行 success后执行 因为 wx.updateAppMessageShareData wx.updateTimelineShareData 内部是一个异步函数 
+				// callback放在后面更符合设置分享的逻辑
+				wx.updateAppMessageShareData(fxData); // 分享给朋友
+        wx.updateTimelineShareData(fxData); // 分享到朋友圈
+				callback && callback();
 			})
 		}
 	},
